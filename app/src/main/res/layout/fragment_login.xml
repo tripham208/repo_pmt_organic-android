@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.login.LoginFragment">
+
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="@dimen/_128dp"
+        android:layout_height="@dimen/_128dp"
+        android:layout_marginTop="@dimen/_32dp"
+        android:contentDescription="@string/logo"
+
+        android:src="@drawable/logo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="ImageContrastCheck" />
+
+    <EditText
+        android:id="@+id/edUserName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_layout"
+        android:layout_marginTop="@dimen/_32dp"
+        android:layout_marginEnd="@dimen/margin_layout"
+        android:autofillHints=""
+        android:drawableStart="@drawable/ic_baseline_mail_outline_24"
+        android:drawablePadding="@dimen/_8dp"
+        android:ems="10"
+        android:hint="@string/email_login_input"
+        android:inputType="textPersonName|text"
+        android:minHeight="48dp"
+        android:textColorHint="#757575"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView3" />
+
+    <EditText
+        android:id="@+id/edPass"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_layout"
+        android:layout_marginEnd="@dimen/margin_layout"
+        android:autofillHints=""
+        android:drawableStart="@drawable/ic_baseline_lock_36"
+        android:drawablePadding="@dimen/_8dp"
+        android:ems="10"
+        android:hint="@string/password"
+        android:inputType="textPassword"
+        android:minHeight="48dp"
+        android:textColorHint="#757575"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edUserName" />
+
+    <Button
+        style="@style/button"
+        android:id="@+id/btnLogin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_layout"
+        android:layout_marginTop="@dimen/_16dp"
+        android:layout_marginEnd="@dimen/margin_layout"
+        android:text="@string/login"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edPass" />
+
+    <TextView
+        android:id="@+id/tvSMS"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_16dp"
+        android:layout_marginEnd="@dimen/margin_layout"
+        android:text="@string/login_with_sms"
+        android:textColor="#1976D2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnLogin" />
+
+    <View
+        android:id="@+id/divider3"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginStart="@dimen/margin_layout"
+        android:layout_marginTop="@dimen/_16dp"
+        android:layout_marginEnd="@dimen/margin_layout"
+        android:background="?android:attr/listDivider"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvSMS" />
+</androidx.constraintlayout.widget.ConstraintLayout>

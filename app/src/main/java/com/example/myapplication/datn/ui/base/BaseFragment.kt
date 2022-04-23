@@ -54,7 +54,7 @@ abstract class BaseFragment<out T : ViewBinding> : Fragment() {
 
     open fun observerLiveData() {}
 
-    open fun initDataSaveArgs(){}
+    open fun initDataSaveArgs() {}
 
     override fun onDestroyView() {
         super.onDestroyView()

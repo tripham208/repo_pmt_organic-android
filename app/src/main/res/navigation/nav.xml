@@ -1,6 +1,83 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/nav">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav"
+    app:startDestination="@id/mainFragment2">
 
+    <fragment
+        android:id="@+id/loginOrRegisterFragment"
+        android:name="com.example.myapplication.datn.ui.login.LoginOrRegisterFragment"
+        android:label="fragment_login_or_register"
+        tools:layout="@layout/fragment_login_or_register" >
+        <action
+            android:id="@+id/action_loginOrRegisterFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_loginOrRegisterFragment_to_verificationFragment"
+            app:destination="@id/verificationFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.example.myapplication.datn.ui.login.LoginFragment"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/action_loginFragment_to_passwordFragment"
+            app:destination="@id/passwordFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_loginOrRegisterFragment"
+            app:destination="@id/loginOrRegisterFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_mainFragment"
+            app:destination="@id/main" />
+    </fragment>
+    <fragment
+        android:id="@+id/passwordFragment"
+        android:name="com.example.myapplication.datn.ui.login.PasswordFragment"
+        android:label="fragment_password"
+        tools:layout="@layout/fragment_password" />
+    <fragment
+        android:id="@+id/verificationFragment"
+        android:name="com.example.myapplication.datn.ui.login.VerificationFragment"
+        android:label="fragment_verification"
+        tools:layout="@layout/fragment_verification" />
+    <navigation android:id="@+id/main_nest"
+        app:startDestination="@id/homeFragment">
+        <fragment
+            android:id="@+id/mainFragment"
+            android:name="com.example.myapplication.datn.ui.MainFragment"
+            android:label="fragment_main"
+            tools:layout="@layout/fragment_main" />
+        <fragment
+            android:id="@+id/accountFragment"
+            android:name="com.example.myapplication.datn.ui.account.AccountFragment"
+            android:label="fragment_account"
+            tools:layout="@layout/fragment_account" />
+        <fragment
+            android:id="@+id/favoriteFragment"
+            android:name="com.example.myapplication.datn.ui.favorite.FavoriteFragment"
+            android:label="fragment_favorite"
+            tools:layout="@layout/fragment_favorite" />
+        <fragment
+            android:id="@+id/historyFragment"
+            android:name="com.example.myapplication.datn.ui.order.HistoryFragment"
+            android:label="fragment_history"
+            tools:layout="@layout/fragment_history" />
+        <fragment
+            android:id="@+id/homeFragment"
+            android:name="com.example.myapplication.datn.ui.home.HomeFragment"
+            android:label="fragment_home"
+            tools:layout="@layout/fragment_home" />
+
+    </navigation>
+    <fragment
+        android:id="@+id/mainFragment2"
+        android:name="com.example.myapplication.datn.ui.MainFragment"
+        android:label="fragment_main"
+        tools:layout="@layout/fragment_main" >
+        <action
+            android:id="@+id/action_mainFragment2_to_loginOrRegisterFragment"
+            app:destination="@id/loginOrRegisterFragment" />
+    </fragment>
 </navigation>

@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "533218732721",
+    "project_id": "datn-68a63",
+    "storage_bucket": "datn-68a63.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:533218732721:android:050114887a5f39e68d5090",
+        "android_client_info": {
+          "package_name": "com.example.myapplication.datn"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "533218732721-7c2krcr2f3mu4fjofa3mj7uj00mviqak.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.myapplication.datn",
+            "certificate_hash": "9120caeea8f8d18ac200d6180ed1b9dfd5fc6302"
+          }
+        },
+        {
+          "client_id": "533218732721-lqqle9lfa9oq8p37bi1etjvqm2lq7rlm.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.myapplication.datn",
+            "certificate_hash": "c66a04a65dda01b768d1693ad99355f2e85767da"
+          }
+        },
+        {
+          "client_id": "533218732721-775bqt141bvsnkehk477680dca734t4f.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAHd_fAjhgGsGpC8xShPQFHSW84N3Xoh9E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "533218732721-775bqt141bvsnkehk477680dca734t4f.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

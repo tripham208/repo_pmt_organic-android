@@ -7,4 +7,13 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+
+    <color name="basil_500">#356859</color>
+    <color name="basil_800">#37966F</color>
+    <color name="basil_100">#b9e4c9</color>
+    <color name="basil_50">#FFFBE6</color>
+
+    <color name="oga_300">#51B34C</color>
+
 </resources>

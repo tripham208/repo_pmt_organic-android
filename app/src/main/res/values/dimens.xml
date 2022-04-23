@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="_128dp">128dp</dimen>
+    <dimen name="_32dp">32dp</dimen>
+    <dimen name="_16dp">16dp</dimen>
+    <dimen name="margin_layout">16dp</dimen>
+    <dimen name="_8dp">8dp</dimen>
+    <dimen name="_64dp">64dp</dimen>
+    <dimen name="_24dp">24dp</dimen>
+    <dimen name="_48dp">48dp</dimen>
+    <dimen name="big_text">24sp</dimen>
+    <dimen name="text_medium">18sp</dimen>
+    <dimen name="text_button">18sp</dimen>
+    <dimen name="_4dp">4dp</dimen>
+    <dimen name="image_size">64dp</dimen>
+
+</resources>

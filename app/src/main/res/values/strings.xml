@@ -1,3 +1,39 @@
 <resources>
-    <string name="app_name">DATN</string>
+    <string name="app_name">PMT Organic</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="logo">logo</string>
+    <string name="next">Tiếp tục</string>
+    <string name="login_with_pass">Đăng nhập bằng Mật khẩu</string>
+    <string name="email_login_input">Email/Tên đăng nhập</string>
+
+    <string name="very">Mã xác minh đã được gửi tới số</string>
+    <string name="number">0</string>
+    <string name="no_code">Bạn không nhận được mã</string>
+    <string name="send">Gửi lại</string>
+    <string name="textview">TextView</string>
+    <string name="wallet">Thanh toán</string>
+    <string name="address">Địa chỉ</string>
+    <string name="policy">Chính sách qui định</string>
+    <string name="setting">Cài đặt</string>
+    <string name="logout">Đăng xuất</string>
+
+    <string name="search">Tìm kiếm sản phẩm</string>
+    <string name="find">Tìm</string>
+
+    <!-- account-->
+    <string name="phone">Số điện thoại</string>
+    <string name="password">Mật khẩu</string>
+    <string name="login_with_sms">Đăng nhập bằng SMS</string>
+    <string name="login">Đăng nhập</string>
+    <string name="email">Email</string>
+
+    <!-- page content-->
+    <string name="home">Trang chủ</string>
+    <string name="order">Đơn hàng</string>
+    <string name="favorite">Yêu thích</string>
+    <string name="account">Tài khoản</string>
+    <string name="cart">Giỏ hàng</string>
+
 </resources>
