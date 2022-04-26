@@ -1,9 +1,7 @@
 package com.example.myapplication.datn.module
 import android.content.Context
 import com.example.myapplication.datn.database.AppDatabase
-import com.example.myapplication.datn.model.dao.ProductDao
-import com.example.myapplication.datn.model.dao.ProductTypeDao
-import com.example.myapplication.datn.model.dao.UserDao
+import com.example.myapplication.datn.model.dao.*
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -27,6 +25,14 @@ object DatabaseModule {
     @Provides
     fun provideProductTypeDao(db: AppDatabase): ProductTypeDao {
         return db.productTypeDao()
+    }
+    @Provides
+    fun provideOrderDao(db: AppDatabase): OrderDao {
+        return db.orderDao()
+    }
+    @Provides
+    fun provideDetailOrderDao(db: AppDatabase): DetailOrderDao {
+        return db.detailOrderDao()
     }
     @Provides
     @Singleton

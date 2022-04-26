@@ -1,0 +1,62 @@
+[
+  {
+    "id": 1,
+    "ten": "rau",
+    "cha": null
+  },
+  {
+    "id": 2,
+    "ten": "thịt & thủy hải sản",
+    "cha": null
+  },
+  {
+    "id": 3,
+    "ten": "trái cây",
+    "cha": null
+  },
+  {
+    "id": 4,
+    "ten": "rau ăn lá",
+    "cha": 1
+  },
+  {
+    "id": 5,
+    "ten": "rau ăn củ",
+    "cha": 1
+  },
+  {
+    "id": 6,
+    "ten": "thịt lợn",
+    "cha": 2
+  },
+  {
+    "id": 7,
+    "ten": "thịt bò",
+    "cha": 2
+  },
+  {
+    "id": 8,
+    "ten": "thủy hải sản",
+    "cha": 2
+  },
+  {
+    "id": 9,
+    "ten": "rau ăn quả",
+    "cha": 1
+  },
+  {
+    "id": 10,
+    "ten": "nấm",
+    "cha": 1
+  },
+  {
+    "id": 11,
+    "ten": "rau gia vị",
+    "cha": 1
+  },
+  {
+    "id": 14,
+    "ten": "trái cây nhập khẩu",
+    "cha": 3
+  }
+]

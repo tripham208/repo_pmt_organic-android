@@ -18,7 +18,15 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        val windowInsetsController =
+            ViewCompat.getWindowInsetsController(window.decorView) ?: return
 
+        // Configure the behavior of the hidden system bars
+        windowInsetsController.systemBarsBehavior =
+            WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE//test change
+        // Hide both the status bar and the navigation bar
+        windowInsetsController.hide(WindowInsetsCompat.Type.navigationBars())
+       // windowInsetsController.hide(WindowInsetsCompat.Type.statusBars())
     }
     /*
     private fun getList(url: String) {

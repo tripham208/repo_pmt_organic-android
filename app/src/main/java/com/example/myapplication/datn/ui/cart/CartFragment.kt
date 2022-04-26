@@ -23,7 +23,5 @@ class CartFragment  : BaseFragment<FragmentCartBinding>() {
 
     override fun initView() {
         super.initView()
-        binding.d.numberPicker.maxValue =10
-        binding.d.numberPicker.minValue =1
     }
 }

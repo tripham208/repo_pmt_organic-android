@@ -1,5 +1,7 @@
 package com.example.myapplication.datn.module
 
+import com.example.myapplication.datn.repository.product.IProductRepository
+import com.example.myapplication.datn.repository.product.ProductRepository
 import com.example.myapplication.datn.repository.user.IUserRepository
 import com.example.myapplication.datn.repository.user.UserRepository
 import dagger.Binds
@@ -11,5 +13,7 @@ import dagger.hilt.android.components.ViewModelComponent
 @Module
 interface ModuleRepo {
     @Binds
-    fun provideRepo(repository: UserRepository): IUserRepository
+    fun provideIUser(useRepository: UserRepository): IUserRepository
+    @Binds
+    fun provideIProduct(productRepository: ProductRepository): IProductRepository
 }

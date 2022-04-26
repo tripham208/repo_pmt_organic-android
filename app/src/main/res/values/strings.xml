@@ -35,5 +35,10 @@
     <string name="favorite">Yêu thích</string>
     <string name="account">Tài khoản</string>
     <string name="cart">Giỏ hàng</string>
+    <string name="button">Button</string>
+    <string name="product_detail">Chi tiết sản phẩm</string>
+    <string name="add_cart">Chọn mua</string>
 
+    <!-- string format-->
+    <string name="vnd_format">%s đ</string>
 </resources>
