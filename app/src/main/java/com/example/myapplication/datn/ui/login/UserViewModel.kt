@@ -1,9 +1,10 @@
 package com.example.myapplication.datn.ui.login
 
+import androidx.annotation.StringRes
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.viewModelScope
-import com.example.myapplication.datn.MarsApi
+import com.example.myapplication.datn.R
+import com.example.myapplication.datn.model.entity.User
 import com.example.myapplication.datn.repository.user.IUserRepository
 import com.example.myapplication.datn.ui.base.BaseViewModel
 import com.example.myapplication.datn.utils.Logger
@@ -12,26 +13,45 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class UserViewModel @Inject constructor(): BaseViewModel() {
-/*
+class UserViewModel @Inject constructor(private val iUserRepository: IUserRepository) : BaseViewModel() {
+    val user: LiveData<User> = iUserRepository.user
 
-    /**
-     * Call getMarsPhotos() on init so we can display status immediately.
-     */
-    init {
-        getMarsPhotos()
+    private val _loginResult = MutableLiveData<Int>()
+    val loginResult: LiveData<Int>
+        get() = _loginResult
+
+    fun clickLogin(username: String, pass: String) {
+        Logger.d("HERE")
+        coroutineScope.launch {
+            val invalid = checkInvalidInput(pass)
+            Logger.d("$invalid")
+            if (invalid) {
+                _loginResult.postValue(INVALID)
+            } else {
+                checkLogin(username, pass)
+            }
+        }
+    }
+    private suspend fun checkLogin(username: String, pass: String) {
+        val isSuccess = iUserRepository.checkLogin(username, pass)
+        if (isSuccess) {
+            _loginResult.postValue(SUCCESS)
+        } else {
+            _loginResult.postValue(FAIL)
+        }
     }
 
-    /**
-     * Gets Mars photos information from the Mars API Retrofit service and updates the
-     * [MarsPhoto] [List] [LiveData].
-     */
-     fun getMarsPhotos() {
+    private suspend fun checkInvalidInput(pass: String): Boolean {
+        return pass.length < 6
+    }
 
-        viewModelScope.launch {
-            Logger.d("here")
-            val listResult = MarsApi.retrofitService.getPhotos()
-            Logger.d("$listResult")
-        }
-    }*/
+    companion object{
+        @StringRes
+        const val INVALID = R.string.pass_invalid
+        const val SUCCESS = R.string.success
+        const val FAIL = R.string.fail
+    }
+
+
+
 }

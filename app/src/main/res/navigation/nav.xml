@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav"
-    app:startDestination="@id/mainFragment2">
+    app:startDestination="@id/loginFragment">
 
     <fragment
         android:id="@+id/loginOrRegisterFragment"
@@ -28,6 +28,9 @@
         <action
             android:id="@+id/action_loginFragment_to_loginOrRegisterFragment"
             app:destination="@id/loginOrRegisterFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_mainFragment2"
+            app:destination="@id/mainFragment2" />
     </fragment>
     <fragment
         android:id="@+id/passwordFragment"
@@ -54,6 +57,12 @@
             android:name="page"
             app:argType="integer"
             android:defaultValue="2" />
+        <action
+            android:id="@+id/action_mainFragment2_to_cartFragment"
+            app:destination="@id/cartFragment" />
+        <action
+            android:id="@+id/action_mainFragment2_to_loginFragment"
+            app:destination="@id/loginFragment" />
     </fragment>
     <fragment
         android:id="@+id/productDetailFragment"
@@ -69,4 +78,14 @@
             app:nullable="true"
             android:defaultValue="@null" />
     </fragment>
+    <fragment
+        android:id="@+id/cartFragment"
+        android:name="com.example.myapplication.datn.ui.cart.CartFragment"
+        android:label="fragment_cart"
+        tools:layout="@layout/fragment_cart" />
+    <fragment
+        android:id="@+id/firstFragment"
+        android:name="com.example.myapplication.datn.ui.main.FirstFragment"
+        android:label="fragment_first"
+        tools:layout="@layout/fragment_first" />
 </navigation>

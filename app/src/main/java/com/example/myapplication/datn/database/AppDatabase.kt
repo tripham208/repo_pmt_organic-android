@@ -43,8 +43,6 @@ abstract class AppDatabase : RoomDatabase() {
                     if (json != null) {
                         insertData(json, productDao)
                     }
-
-
                 }
             }
 

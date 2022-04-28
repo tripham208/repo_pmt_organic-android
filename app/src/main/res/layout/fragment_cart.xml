@@ -6,25 +6,15 @@
     android:layout_height="match_parent"
     tools:context=".ui.cart.CartFragment">
 
-    <include
-        android:id="@+id/d"
-        layout="@layout/view_product_cart"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="216dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <ImageView
         android:id="@+id/imageView5"
         android:layout_width="@dimen/image_size"
         android:layout_height="@dimen/image_size"
+        android:contentDescription="@string/logo"
         android:src="@drawable/logo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:contentDescription="@string/logo" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textView17"
@@ -39,11 +29,71 @@
 
     <View
         android:id="@+id/divider4"
-        android:layout_width="409dp"
+        android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_marginTop="16dp"
         android:background="?android:attr/listDivider"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView17" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:contentDescription="@string/cart"
+        android:paddingStart="@dimen/layout_start"
+        android:paddingEnd="@dimen/layout_end"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/divider4">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tvQuantityCart"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/quantity" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rcvCart"
+                android:layout_marginTop="16dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="16dp"
+                android:background="?android:attr/listDivider" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:weightSum="2"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/tvSumCart"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="35.000 đ"
+                    android:layout_weight="1"
+                    android:textSize="30sp" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnOrderCart"
+                    style="@style/button"
+                    android:textSize="22sp"
+                    android:layout_weight="1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/order2" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

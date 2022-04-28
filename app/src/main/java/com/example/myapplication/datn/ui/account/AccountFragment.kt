@@ -9,7 +9,9 @@ import com.example.myapplication.datn.R
 import com.example.myapplication.datn.databinding.FragmentAccountBinding
 import com.example.myapplication.datn.databinding.FragmentPasswordBinding
 import com.example.myapplication.datn.ui.base.BaseFragment
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class AccountFragment : BaseFragment<FragmentAccountBinding>() {
     override fun createBinding(
         inflater: LayoutInflater,

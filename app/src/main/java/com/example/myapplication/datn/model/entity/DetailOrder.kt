@@ -5,24 +5,31 @@ import android.os.Parcelable
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.squareup.moshi.Json
 
 @Entity(tableName = "detail_order")
-class DetailOrder(
-    @PrimaryKey
+data class DetailOrder(
+    @Json(name = "id")
     @ColumnInfo(name = "id") val id: Int?,
+    @Json(name = "idhoadon")
     @ColumnInfo(name = "idOrder") val idhoadon: Int,
+    @PrimaryKey
+    @Json(name = "idsanpham")
     @ColumnInfo(name = "idProduct") val idsanpham: Int,
-    @ColumnInfo(name = "quantity") val soluong: String?,
-    @ColumnInfo(name = "unitPrice") val dongia: String?,
-    @ColumnInfo(name = "discount") val giamgia: String?,
+    @Json(name = "soluong")
+    @ColumnInfo(name = "quantity") val soluong: Int,
+    @Json(name = "dongia")
+    @ColumnInfo(name = "unitPrice") val dongia: Int,
+    @Json(name = "giamgia")
+    @ColumnInfo(name = "discount") val giamgia: Int?,
 ): Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readValue(Int::class.java.classLoader) as? Int,
         parcel.readInt(),
         parcel.readInt(),
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readString()
+        parcel.readInt(),
+        parcel.readInt(),
+        parcel.readInt()
     ) {
     }
 
@@ -30,9 +37,11 @@ class DetailOrder(
         parcel.writeValue(id)
         parcel.writeInt(idhoadon)
         parcel.writeInt(idsanpham)
-        parcel.writeString(soluong)
-        parcel.writeString(dongia)
-        parcel.writeString(giamgia)
+        parcel.writeInt(soluong)
+        parcel.writeInt(dongia)
+        if (giamgia != null) {
+            parcel.writeInt(giamgia)
+        }
     }
 
     override fun describeContents(): Int {

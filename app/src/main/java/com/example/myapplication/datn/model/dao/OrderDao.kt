@@ -10,7 +10,7 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface OrderDao {
 
-    @Query("SELECT * FROM `order` LIMIT 1 ")
+    @Query("SELECT * FROM orderr LIMIT 1 ")
     fun getOrderToLiveData(): LiveData<Order>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE) //skip if same content
@@ -21,4 +21,7 @@ interface OrderDao {
 
     @Update
     suspend fun updates(vararg item: Order)
+
+
+
 }

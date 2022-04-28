@@ -15,7 +15,7 @@ interface ProductDao {
     @Query("SELECT * FROM product ")
     fun getAllToLiveData(): LiveData<List<Product>>
 
-    @Insert(onConflict = OnConflictStrategy.IGNORE) //skip if same content
+    @Insert(onConflict = OnConflictStrategy.REPLACE) //skip if same content
     suspend fun insert(item: Product)
 
     @Query(
@@ -27,8 +27,17 @@ interface ProductDao {
     @Update
     suspend fun update(vararg item: Product)
 
+    @Insert(onConflict = OnConflictStrategy.REPLACE) //skip if same content
+    suspend fun inserts(vararg item: Product)
 
     @Delete
     suspend fun delete(item: Product)
+
+    @Query(
+        "SELECT * FROM product " +
+                "WHERE id = :id limit 1"
+    )
+    suspend fun getProduct(id: Int): Product
+
 
 }

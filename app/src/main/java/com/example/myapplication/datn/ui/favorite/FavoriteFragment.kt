@@ -54,6 +54,12 @@ class FavoriteFragment : BaseFragment<FragmentFavoriteBinding>() {
         super.observerLiveData()
         viewModel.favorite.observe(viewLifecycleOwner) {
             adapter?.submitList(it)
+            if (it.isEmpty()) {
+                binding.tvNumFavorite.visibility = View.VISIBLE
+            } else {
+                binding.tvNumFavorite.visibility = View.GONE
+
+            }
         }
     }
 }

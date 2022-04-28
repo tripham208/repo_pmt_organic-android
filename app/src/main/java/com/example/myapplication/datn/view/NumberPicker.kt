@@ -13,6 +13,8 @@ import com.example.myapplication.datn.databinding.ViewNumberpickerHorizontalBind
 class NumberPicker : LinearLayout {
     private var _binding: ViewNumberpickerHorizontalBinding? = null
 
+    var changeNumber: ((Int) -> Unit)? = null
+
 
     constructor(context: Context) : super(context) {
         init(null, 0)
@@ -43,20 +45,25 @@ class NumberPicker : LinearLayout {
         _binding?.apply {
             btnLessNumberPicker.setOnClickListener {
                 val number = getNumber()
-                if (number != MIN){
+                if (number != MIN) {
                     edValueNumberPicker.setText((number - 1).toString())
                 }
+                changeNumber?.invoke(getNumber())
             }
             btnMoreNumberPicker.setOnClickListener {
                 val number = getNumber()
-                if (number != MAX){
+                if (number != MAX) {
                     edValueNumberPicker.setText((number + 1).toString())
                 }
+                changeNumber?.invoke(getNumber())
             }
         }
     }
 
     fun getNumber() = _binding?.edValueNumberPicker?.text.toString().toInt()
+    fun setNumber(number: Int) {
+        _binding?.edValueNumberPicker?.setText(number.toString())
+    }
 
     private fun initView() {
         _binding?.apply {

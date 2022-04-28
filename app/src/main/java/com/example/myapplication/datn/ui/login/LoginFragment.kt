@@ -4,14 +4,19 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.myapplication.datn.R
 import com.example.myapplication.datn.databinding.FragmentLoginBinding
 import com.example.myapplication.datn.ui.base.BaseFragment
+import com.example.myapplication.datn.ui.home.HomeViewModel
+import com.example.myapplication.datn.utils.Logger
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class LoginFragment : BaseFragment<FragmentLoginBinding>() , View.OnClickListener {
+    private val viewModel: UserViewModel by activityViewModels()
     override fun createBinding(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -39,6 +44,22 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() , View.OnClickListene
     }
 
     private fun handleClickLogin() {
+        val username = binding.edUserName.text.toString()
+        val password = binding.edPass.text.toString()
+
+        viewModel.clickLogin(username,password)
+    }
+
+    override fun observerLiveData() {
+        super.observerLiveData()
+        viewModel.user.observe(viewLifecycleOwner){
+            if (it!=null)
+                findNavController().navigate(R.id.action_loginFragment_to_mainFragment2)
+        }
+        viewModel.loginResult.observe(viewLifecycleOwner){
+            Toast.makeText(context,resources.getString(it),Toast.LENGTH_LONG).show()
+            Logger.d(it.toString())
+        }
 
     }
 

@@ -8,6 +8,8 @@ interface IProductRepository {
     val allProduct: LiveData<List<Product>>
     val favoriteProduct: LiveData<List<Product>>
     suspend fun update(product: Product)
+    suspend fun getProductId(id: Int):Product
+    suspend fun getFromAPI()
 
 
 }
