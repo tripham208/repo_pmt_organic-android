@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/card_product_item"
+    android:id="@+id/cardOrderDetailItem"
     style="@style/Widget.Material3.CardView.Elevated"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -17,12 +17,12 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:weightSum="7"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:weightSum="7">
 
 
         <ImageView
-            android:id="@+id/img_card_product_item"
+            android:id="@+id/imgOrderDetailItem"
             android:layout_width="96dp"
             android:layout_height="wrap_content"
             android:layout_margin="4dp"
@@ -34,12 +34,12 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
             android:layout_weight="6"
+            android:orientation="vertical"
             android:padding="8dp">
 
             <TextView
-                android:id="@+id/tvName_card_product_item"
+                android:id="@+id/tvNameOrderDetailItem"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="sans-serif"
@@ -49,7 +49,7 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/tvUnit_card_product_item"
+                android:id="@+id/tvUnitOrderDetailItem"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
@@ -60,25 +60,27 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/tvValue_card_product_item"
+                android:id="@+id/tvQuantityOrderDetailItem"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="32.500 đ"
-                android:textColor="@color/oga_300"
+                android:fontFamily="sans-serif"
+                android:text="@string/quantity"
                 android:textSize="16sp"
-                android:textStyle="bold" />
-
+                android:textStyle="" />
 
         </LinearLayout>
 
-        <ImageButton
-            android:id="@+id/imgBtnFavoriteCard_product_item"
-            android:layout_width="@dimen/_24dp"
-            android:layout_height="@dimen/_24dp"
-            android:layout_weight="1"
-            android:src="@drawable/ic_baseline_favorite_border_24"
-            android:visibility="invisible" />
+        <TextView
+            android:id="@+id/tvValue_card_product_item_cart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="32.500 đ"
+            android:textColor="@color/oga_300"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
 
     </LinearLayout>
 

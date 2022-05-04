@@ -1,15 +1,13 @@
 package com.example.myapplication.datn.database
 
-import com.example.myapplication.datn.model.entity.DetailOrder
-import com.example.myapplication.datn.model.entity.Order
-import com.example.myapplication.datn.model.entity.Product
-import com.example.myapplication.datn.model.entity.User
+import com.example.myapplication.datn.model.entity.*
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
+import kotlinx.coroutines.internal.PrepareOp
+import okhttp3.RequestBody
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
-import retrofit2.http.GET
-import retrofit2.http.Path
+import retrofit2.http.*
 
 interface AppAPI {
 
@@ -31,9 +29,24 @@ interface AppAPI {
     @GET("bill/id-customer/{id}")
     suspend fun getOrdersByIdUser(@Path("id") id: Int): List<Order>
 
+    @POST("bill-detail")
+    suspend fun addDetail(@Body detailOrder: DetailOrder)
+
+    @POST("bill")
+    suspend fun updateCart(@Body order: Order)
+
+    @POST("user")
+    suspend fun register(@Body user: User): List<User>
+
+
+    /*
+    @GET("category/update/{id}")
+    suspend fun updateCart(@Body order: ProductType,("id") id: Int)
+*/
     companion object {
-        private const val CODE = "f33b-2405-4803-fc5d-d720-24a0-e905-41ec-be1a.ap.ngrok.io"
+        private const val CODE = "debf-2405-4803-fc5d-d720-bdc9-366c-281d-7a41.ap.ngrok.io"
         const val BASE_URL = "https://$CODE/api/"
+        const val IMG_URL = "https://$CODE"
     }
 }
 

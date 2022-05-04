@@ -6,9 +6,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import com.example.myapplication.datn.R
 import com.example.myapplication.datn.databinding.FragmentHistoryOrderBinding
 import com.example.myapplication.datn.databinding.FragmentNowOrderBinding
+import com.example.myapplication.datn.model.entity.Order
+import com.example.myapplication.datn.ui.MainFragmentDirections
 import com.example.myapplication.datn.ui.adapter.OrderAdapter
 import com.example.myapplication.datn.ui.adapter.ProductFavoriteAdapter
 import com.example.myapplication.datn.ui.base.BaseFragment
@@ -39,14 +42,26 @@ class HistoryOrderFragment : BaseFragment<FragmentHistoryOrderBinding>() {
         super.initAction()
         adapter.itemSelected = {
             Logger.d(it.toString())
+            val action = MainFragmentDirections.actionMainFragment2ToOrderDetailFragment2(it)
+            findNavController().navigate(action)
         }
 
     }
 
     override fun observerLiveData() {
         super.observerLiveData()
-        viewModel.historyResult.observe(viewLifecycleOwner) {
-            adapter.submitList(it)
+        viewModel.historyResult.observe(viewLifecycleOwner) { list ->
+            val listH = mutableListOf<Order>()
+            list.forEach {
+                if (it.loaidon == 2) {
+                    listH.add(it)
+                }
+            }
+            if (listH.isEmpty())
+                binding.tvNoOrderHistory.visibility=View.VISIBLE
+            else
+                binding.tvNoOrderHistory.visibility=View.GONE
+            adapter.submitList(listH)
         }
     }
 

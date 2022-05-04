@@ -54,11 +54,12 @@
         app:layout_constraintTop_toBottomOf="@+id/textView4">
 
         <EditText
+            android:hint="@string/space"
+            android:id="@+id/num1Very"
             android:layout_width="40dp"
             android:layout_height="45dp"
             android:layout_marginStart="4dp"
             android:gravity="center"
-            android:hint="@string/number"
             android:imeOptions="actionNext"
             android:importantForAutofill="no"
             android:inputType="number"
@@ -68,11 +69,12 @@
             tools:ignore="TouchTargetSizeCheck" />
 
         <EditText
+            android:hint="@string/space"
+            android:id="@+id/num2Very"
             android:layout_width="40dp"
             android:layout_height="45dp"
             android:layout_marginStart="4dp"
             android:gravity="center"
-            android:hint="@string/number"
             android:imeOptions="actionNext"
             android:importantForAutofill="no"
             android:inputType="number"
@@ -82,11 +84,11 @@
             tools:ignore="TouchTargetSizeCheck" />
 
         <EditText
+            android:id="@+id/num3Very"
             android:layout_width="40dp"
             android:layout_height="45dp"
             android:layout_marginStart="4dp"
             android:gravity="center"
-            android:hint="@string/number"
             android:imeOptions="actionNext"
             android:importantForAutofill="no"
             android:inputType="number"
@@ -96,11 +98,11 @@
             tools:ignore="TouchTargetSizeCheck" />
 
         <EditText
+            android:id="@+id/num4Very"
             android:layout_width="40dp"
             android:layout_height="45dp"
             android:layout_marginStart="4dp"
             android:gravity="center"
-            android:hint="@string/number"
             android:imeOptions="actionNext"
             android:importantForAutofill="no"
             android:inputType="number"
@@ -110,11 +112,11 @@
             tools:ignore="TouchTargetSizeCheck" />
 
         <EditText
+            android:id="@+id/num5Very"
             android:layout_width="40dp"
             android:layout_height="45dp"
             android:layout_marginStart="4dp"
             android:gravity="center"
-            android:hint="@string/number"
             android:imeOptions="actionNext"
             android:importantForAutofill="no"
             android:inputType="number"
@@ -124,11 +126,11 @@
             tools:ignore="TouchTargetSizeCheck" />
 
         <EditText
+            android:id="@+id/num6Very"
             android:layout_width="40dp"
             android:layout_height="45dp"
             android:layout_marginStart="4dp"
             android:gravity="center"
-            android:hint="@string/number"
             android:imeOptions="actionNext"
             android:importantForAutofill="no"
             android:inputType="number"

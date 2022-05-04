@@ -29,4 +29,8 @@ interface DetailOrderDao {
                 "WHERE idProduct = :intt "
     )
     suspend fun getItem(intt: Int): DetailOrder
+
+    @Query("DELETE FROM detail_order")
+    suspend fun deleteAll()
+
 }

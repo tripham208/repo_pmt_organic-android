@@ -6,6 +6,7 @@ import com.example.myapplication.datn.model.dao.DetailOrderDao
 import com.example.myapplication.datn.model.dao.OrderDao
 import com.example.myapplication.datn.model.entity.DetailOrder
 import com.example.myapplication.datn.model.entity.Order
+import com.example.myapplication.datn.model.entity.ProductType
 import com.example.myapplication.datn.utils.Logger
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -21,6 +22,7 @@ class OrderRepository @Inject constructor(
 
     override suspend fun updateCart(item: Order) {
         orderDao.updates(item)
+        api.updateCart(item)
     }
 
     override suspend fun insertCart(item: Order) {
@@ -33,10 +35,10 @@ class OrderRepository @Inject constructor(
 
     override suspend fun updateDetail(item: DetailOrder) {
         orderDetailOrder.updates(item)
+        api.addDetail(item)
     }
 
     override suspend fun insertDetail(item: DetailOrder) {
-
             if (
                 orderDetailOrder.getItem(item.idsanpham) != null
             ) {
@@ -47,6 +49,7 @@ class OrderRepository @Inject constructor(
                 updateDetail(new)
             }else{
                 orderDetailOrder.insert(item)
+                api.addDetail(item)
             }
     }
 

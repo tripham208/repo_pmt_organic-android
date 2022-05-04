@@ -8,10 +8,14 @@ import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import androidx.navigation.get
+import com.bumptech.glide.Glide
 import com.example.myapplication.datn.R
+import com.example.myapplication.datn.database.AppAPI
 import com.example.myapplication.datn.databinding.FragmentProductDetailBinding
 import com.example.myapplication.datn.model.entity.DetailOrder
 import com.example.myapplication.datn.model.entity.Order
+import com.example.myapplication.datn.ui.MainFragmentDirections
 import com.example.myapplication.datn.ui.base.BaseFragment
 import com.example.myapplication.datn.ui.cart.CartViewModel
 import com.example.myapplication.datn.ui.home.HomeViewModel
@@ -36,10 +40,6 @@ class ProductDetailFragment : BaseFragment<FragmentProductDetailBinding>() {
         super.initAction()
         binding.apply {
             imgBtnBackDetailProduct.setOnClickListener {
-                /*val action =
-                    ProductDetailFragmentDirections.actionProductDetailFragmentToMainFragment2(2)
-                findNavController().navigate(action)*/
-                //this@ProductDetailFragment
                 findNavController().popBackStack()
             }
             imgBtnAddFavoriteDetailProduct.setOnClickListener {
@@ -54,11 +54,13 @@ class ProductDetailFragment : BaseFragment<FragmentProductDetailBinding>() {
                 }
             }
             imgBtnCartDetailProduct.setOnClickListener {
-                findNavController().navigate(R.id.action_mainFragment2_to_cartFragment)
+                val action =
+                    ProductDetailFragmentDirections.actionProductDetailFragmentToCartFragment(1)
+                findNavController().navigate(action)
             }
             btnAddCartDetail.setOnClickListener {
                 if (cartViewModel.cart.value != null) {
-                    val detail = cartViewModel.cart.value!!.id?.let { it1 ->
+                    val detail = cartViewModel.cart.value!!.id.let { it1 ->
                         args.product?.id?.let { it2 ->
                             args.product?.dongia?.let { it3 ->
                                 DetailOrder(
@@ -83,10 +85,10 @@ class ProductDetailFragment : BaseFragment<FragmentProductDetailBinding>() {
                             idnhanvien = 1,
                             tongtien = 0,
                             thoigian = null, thanhtoan = 0,
-                            loaidon = 4
+                            loaidon = 1
                         )
                     )
-                    val detail = cartViewModel.cart.value!!.id?.let { it1 ->
+                    val detail = cartViewModel.cart.value!!.id.let { it1 ->
                         args.product?.id?.let { it2 ->
                             args.product?.dongia?.let { it3 ->
                                 DetailOrder(
@@ -109,9 +111,6 @@ class ProductDetailFragment : BaseFragment<FragmentProductDetailBinding>() {
                     resources.getString(R.string.add_cart_done, args.product?.ten),
                     Toast.LENGTH_LONG
                 ).show()
-                val action =
-                    ProductDetailFragmentDirections.actionProductDetailFragmentToMainFragment2(2)
-                findNavController().navigate(action)
             }
         }
     }
@@ -131,6 +130,10 @@ class ProductDetailFragment : BaseFragment<FragmentProductDetailBinding>() {
                 } else {
                     binding.imgBtnAddFavoriteDetailProduct.setImageResource(R.drawable.ic_baseline_favorite_border_24)
                 }
+                Glide.with (this@ProductDetailFragment)
+                    .load ( "${AppAPI.IMG_URL}${it?.anh}")
+                    .fitCenter().error(R.drawable.ic_baseline_error_24).placeholder(R.drawable.ic_baseline_downloading_24)
+                    .into (imgDetailProduct);
             }
         }
 

@@ -41,15 +41,22 @@
         android:id="@+id/verificationFragment"
         android:name="com.example.myapplication.datn.ui.login.VerificationFragment"
         android:label="fragment_verification"
-        tools:layout="@layout/fragment_verification" />
+        tools:layout="@layout/fragment_verification" >
+        <action
+            android:id="@+id/action_verificationFragment_to_mainFragment2"
+            app:destination="@id/mainFragment2" />
+        <argument
+            android:name="phone"
+            android:defaultValue="0" />
+        <action
+            android:id="@+id/action_verificationFragment_to_registerFragment"
+            app:destination="@id/registerFragment" />
+    </fragment>
     <fragment
         android:id="@+id/mainFragment2"
         android:name="com.example.myapplication.datn.ui.MainFragment"
         android:label="fragment_main"
         tools:layout="@layout/fragment_main" >
-        <action
-            android:id="@+id/action_mainFragment2_to_loginOrRegisterFragment"
-            app:destination="@id/loginOrRegisterFragment" />
         <action
             android:id="@+id/action_mainFragment2_to_productDetailFragment"
             app:destination="@id/productDetailFragment" />
@@ -58,34 +65,112 @@
             app:argType="integer"
             android:defaultValue="2" />
         <action
-            android:id="@+id/action_mainFragment2_to_cartFragment"
-            app:destination="@id/cartFragment" />
-        <action
             android:id="@+id/action_mainFragment2_to_loginFragment"
             app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_mainFragment2_to_accountInformationFragment"
+            app:destination="@id/accountInformationFragment" />
+        <action
+            android:id="@+id/action_mainFragment2_to_orderDetailFragment2"
+            app:destination="@id/orderDetailFragment2" />
+        <action
+            android:id="@+id/action_mainFragment2_to_searchFragment"
+            app:destination="@id/searchFragment" />
     </fragment>
     <fragment
         android:id="@+id/productDetailFragment"
         android:name="com.example.myapplication.datn.ui.detail.ProductDetailFragment"
         android:label="fragment_product_detail"
         tools:layout="@layout/fragment_product_detail" >
-        <action
-            android:id="@+id/action_productDetailFragment_to_mainFragment2"
-            app:destination="@id/mainFragment2" />
         <argument
             android:name="product"
             app:argType="com.example.myapplication.datn.model.entity.Product"
             app:nullable="true"
             android:defaultValue="@null" />
+        <action
+            android:id="@+id/action_productDetailFragment_to_cartFragment"
+            app:destination="@id/cartFragment" />
+        <argument
+            android:name="type"
+            app:argType="integer"
+            android:defaultValue="0" />
     </fragment>
     <fragment
         android:id="@+id/cartFragment"
         android:name="com.example.myapplication.datn.ui.cart.CartFragment"
         android:label="fragment_cart"
-        tools:layout="@layout/fragment_cart" />
+        tools:layout="@layout/fragment_cart" >
+        <action
+            android:id="@+id/action_cartFragment_to_productDetailFragment"
+            app:destination="@id/productDetailFragment" />
+        <argument
+            android:name="type"
+            app:argType="integer"
+            android:defaultValue="0" />
+    </fragment>
     <fragment
         android:id="@+id/firstFragment"
         android:name="com.example.myapplication.datn.ui.main.FirstFragment"
         android:label="fragment_first"
-        tools:layout="@layout/fragment_first" />
+        tools:layout="@layout/fragment_first" >
+        <action
+            android:id="@+id/action_firstFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_firstFragment_to_mainFragment2"
+            app:destination="@id/mainFragment2" />
+    </fragment>
+    <fragment
+        android:id="@+id/accountInformationFragment"
+        android:name="com.example.myapplication.datn.ui.account.AccountInformationFragment"
+        android:label="fragment_account_infomation"
+        tools:layout="@layout/fragment_account_infomation" />
+    <fragment
+        android:id="@+id/orderDetailFragment2"
+        android:name="com.example.myapplication.datn.ui.order.OrderDetailFragment"
+        android:label="fragment_order_detail"
+        tools:layout="@layout/fragment_order_detail" >
+        <argument
+            android:name="order"
+            app:argType="com.example.myapplication.datn.model.entity.Order"
+            app:nullable="true"
+            android:defaultValue="@null" />
+        <action
+            android:id="@+id/action_orderDetailFragment2_to_productDetailFragment"
+            app:destination="@id/productDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="com.example.myapplication.datn.ui.search.SearchFragment"
+        android:label="fragment_search"
+        tools:layout="@layout/fragment_search" >
+        <action
+            android:id="@+id/action_searchFragment_to_cartFragment"
+            app:destination="@id/cartFragment" />
+        <argument
+            android:name="text"
+            app:argType="string"
+            app:nullable="true" />
+        <action
+            android:id="@+id/action_searchFragment_to_productDetailFragment"
+            app:destination="@id/productDetailFragment" />
+        <argument
+            android:name="type"
+            app:argType="com.example.myapplication.datn.model.entity.ProductType"
+            android:defaultValue="@null"
+            app:nullable="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/registerFragment"
+        android:name="com.example.myapplication.datn.ui.register.RegisterFragment"
+        android:label="fragment_register"
+        tools:layout="@layout/fragment_register" >
+        <action
+            android:id="@+id/action_registerFragment_to_mainFragment2"
+            app:destination="@id/mainFragment2" />
+        <argument
+            android:name="phone"
+            app:argType="integer"
+            android:defaultValue="0" />
+    </fragment>
 </navigation>

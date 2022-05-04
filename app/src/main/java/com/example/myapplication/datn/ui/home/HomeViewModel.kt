@@ -1,6 +1,8 @@
 package com.example.myapplication.datn.ui.home
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import com.example.myapplication.datn.model.entity.DetailOrder
 import com.example.myapplication.datn.model.entity.Product
 import com.example.myapplication.datn.repository.product.IProductRepository
 import com.example.myapplication.datn.ui.base.BaseViewModel
@@ -12,10 +14,15 @@ import javax.inject.Inject
 @HiltViewModel
 class HomeViewModel @Inject constructor(
     private val iProductRepository: IProductRepository
-    ) :
+) :
     BaseViewModel() {
     val data: LiveData<List<Product>> = iProductRepository.allProduct
     val favorite: LiveData<List<Product>> = iProductRepository.favoriteProduct
+
+
+    private val _search = MutableLiveData<List<Product>>()
+    val search: LiveData<List<Product>>
+        get() = _search
 
     fun update(product: Product) = coroutineScope.launch {
         iProductRepository.update(product)
@@ -29,6 +36,18 @@ class HomeViewModel @Inject constructor(
         return res
     }
 
+     fun search(string: String) {
+         coroutineScope.launch {
+             val list = iProductRepository.search(string)
+             _search.postValue(list)
+         }
+    }
+    fun searchType(id: Int) {
+        coroutineScope.launch {
+            val list = iProductRepository.searchType(id)
+            _search.postValue(list)
+        }
+    }
     init {
         coroutineScope.launch {
             iProductRepository.getFromAPI()

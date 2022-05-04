@@ -7,4 +7,5 @@ interface IUserRepository {
     val user : LiveData<User>
     suspend fun checkLogin(username: String, pass: String): Boolean
     suspend fun getUser(): User
+    suspend fun register(user: User):Boolean
 }

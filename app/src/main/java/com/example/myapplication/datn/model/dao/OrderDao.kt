@@ -22,6 +22,8 @@ interface OrderDao {
     @Update
     suspend fun updates(vararg item: Order)
 
+    @Query("DELETE FROM orderr")
+    suspend fun deleteAll()
 
 
 }

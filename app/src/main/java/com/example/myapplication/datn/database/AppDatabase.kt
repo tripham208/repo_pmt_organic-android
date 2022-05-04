@@ -101,7 +101,7 @@ abstract class AppDatabase : RoomDatabase() {
                     AppDatabase::class.java,
                     nameDB
                 )
-                    .addCallback(WordDatabaseCallback(scope, context))
+                 //   .addCallback(WordDatabaseCallback(scope, context))
                     .build()
                 INSTANCE = instance
                 // return instance

@@ -23,10 +23,18 @@ class ProductRepository @Inject constructor(
         return productDao.getProduct(id)
     }
 
-    override suspend fun getFromAPI(){
+    override suspend fun getFromAPI() {
         val list = api.getProducts()
         list.forEach {
             productDao.insert(it)
         }
+    }
+
+    override suspend fun search(string: String): List<Product> {
+        return productDao.searchProduct(string)
+    }
+
+    override suspend fun searchType(id: Int): List<Product> {
+        return productDao.searchProductType(id)
     }
 }

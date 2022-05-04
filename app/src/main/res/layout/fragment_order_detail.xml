@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.cart.CartFragment">
+    tools:context=".ui.order.OrderDetailFragment">
 
     <ImageView
         android:id="@+id/imageView5"
@@ -17,15 +17,28 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView17"
+        android:id="@+id/tvDeTailOrder"
         style="@style/header_page"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:text="@string/cart"
+        android:text="@string/order_detail"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView5" />
+
+    <ImageButton
+        android:id="@+id/imgBtnBackDetailOrder"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/layout_start"
+        android:backgroundTint="@color/basil_50"
+        android:contentDescription="@string/button"
+        android:minHeight="48dp"
+        android:src="@drawable/ic_baseline_arrow_back_ios_24"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <View
         android:id="@+id/divider4"
@@ -35,10 +48,9 @@
         android:background="?android:attr/listDivider"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView17" />
+        app:layout_constraintTop_toBottomOf="@+id/tvDeTailOrder" />
 
     <ScrollView
-        android:id="@+id/scrollCart"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:contentDescription="@string/cart"
@@ -54,13 +66,13 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/tvQuantityCart"
+                android:id="@+id/tvQuantityOrderDetail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/quantity" />
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rcvCart"
+                android:id="@+id/rcvOrderDetail"
                 android:layout_marginTop="16dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -78,34 +90,17 @@
                 android:layout_height="wrap_content">
 
                 <TextView
-                    android:id="@+id/tvSumCart"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/tvSumOrder"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:text="35.000 đ"
                     android:layout_weight="1"
                     android:textSize="30sp" />
 
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btnOrderCart"
-                    style="@style/button"
-                    android:textSize="22sp"
-                    android:layout_weight="1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/order2" />
+
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
 
-    <TextView
-        android:id="@+id/tvNoCart"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/cart_no"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/divider4"
-        app:layout_constraintVertical_bias="0.13" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

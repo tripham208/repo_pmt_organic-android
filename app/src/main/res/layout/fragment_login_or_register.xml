@@ -18,6 +18,7 @@
         android:drawableStart="@drawable/ic_baseline_phone_36"
         android:drawablePadding="@dimen/_8dp"
         android:ems="10"
+        android:text="0399214349"
         android:hint="@string/phone"
         android:inputType="phone"
         android:minHeight="48dp"

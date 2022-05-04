@@ -7,6 +7,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.myapplication.datn.R
 import com.example.myapplication.datn.databinding.FragmentHomeBinding
+import com.example.myapplication.datn.model.entity.ProductType
 import com.example.myapplication.datn.ui.MainFragmentDirections
 import com.example.myapplication.datn.ui.adapter.ProductAdapter
 import com.example.myapplication.datn.ui.base.BaseFragment
@@ -39,37 +40,67 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         binding.rcvHome.adapter = adapter
 
 
-        binding.include.button.setOnClickListener {
-            //binding.drawer.open()
-            findNavController().navigate(R.id.action_mainFragment2_to_productDetailFragment)
-        }
+
         binding.apply {
-
+            imgBtnMenuHome.setOnClickListener {
+                drawerLayout.open()
+            }
         }
 
-        /*
-            binding.topnav.setNavigationItemSelectedListener {
+
+            binding.topNav.setNavigationItemSelectedListener {
                 it.isChecked = true
                 when(it.itemId){
                     R.id.draw1->{
-                        Logger.d("item1")
+                        val action = MainFragmentDirections.actionMainFragment2ToSearchFragment(type = ProductType(4,"rau ăn lá",null),
+                            text = null
+                        )
+                        findNavController().navigate(action)
                     }
                     R.id.draw2->{
-                        Logger.d("item2")
+                        val action = MainFragmentDirections.actionMainFragment2ToSearchFragment(type = ProductType(5,"rau ăn củ",null),
+                            text = null
+                        )
+                        findNavController().navigate(action)
                     }
                     R.id.draw3->{
-                        Logger.d("item3")
+                        val action = MainFragmentDirections.actionMainFragment2ToSearchFragment(type = ProductType(9,"rau ăn quả",null),
+                            text = null
+                        )
+                        findNavController().navigate(action)
                     }
-                    1->{
-                        Logger.d("item4")
+                    R.id.draw4->{
+                        val action = MainFragmentDirections.actionMainFragment2ToSearchFragment(type = ProductType(6,"thịt lợn",null),
+                            text = null
+                        )
+                        findNavController().navigate(action)
                     }
+                    R.id.draw5->{
+                        val action = MainFragmentDirections.actionMainFragment2ToSearchFragment(type = ProductType(7,"thịt bò",null),
+                            text = null
+                        )
+                        findNavController().navigate(action)
+                    }
+                    R.id.draw6->{
+                        val action = MainFragmentDirections.actionMainFragment2ToSearchFragment(type = ProductType(8,"thủy hải sản",null),
+                            text = null
+                        )
+                        findNavController().navigate(action)
+                    }
+                    R.id.draw7->{
+                        val action = MainFragmentDirections.actionMainFragment2ToSearchFragment(type = ProductType(14,"trái cây nhập khẩu",null),
+                            text = null
+                        )
+                        findNavController().navigate(action)
+                    }
+
                 }
-                binding.drawer.close()
+                binding.drawerLayout.close()
                 true
             }
             binding.apply {
-                topnav.menu.add(1,1,1,"item4")
-            }*/
+                //topnav.menu.add(1,1,1,"item4")
+            }
     }
 
     override fun initAction() {
@@ -77,6 +108,12 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
         adapter?.itemSelected = {
             val action = MainFragmentDirections.actionMainFragment2ToProductDetailFragment(it)
+            findNavController().navigate(action)
+        }
+        binding.include.button.setOnClickListener {
+            //binding.drawer.open()
+            val search = binding.include.editTextTextPersonName.text.toString()
+            val action = MainFragmentDirections.actionMainFragment2ToSearchFragment(search)
             findNavController().navigate(action)
         }
     }

@@ -4,7 +4,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.example.myapplication.datn.databinding.FragmentVerificationBinding
 import com.example.myapplication.datn.ui.base.BaseFragment
 import com.example.myapplication.datn.utils.Logger
@@ -22,7 +24,7 @@ class VerificationFragment : BaseFragment<FragmentVerificationBinding>() {
     private var storedVerificationId: String? = ""
     private lateinit var resendToken: PhoneAuthProvider.ForceResendingToken
     private lateinit var callbacks: PhoneAuthProvider.OnVerificationStateChangedCallbacks
-
+    private val args: VerificationFragmentArgs by navArgs()
     override fun createBinding(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -33,7 +35,9 @@ class VerificationFragment : BaseFragment<FragmentVerificationBinding>() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         auth = FirebaseAuth.getInstance()
+        auth?.setLanguageCode("vn")
         // Initialize phone auth callbacks
         // [START phone_auth_callbacks]
         callbacks = object : PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
@@ -56,6 +60,7 @@ class VerificationFragment : BaseFragment<FragmentVerificationBinding>() {
                 if (e is FirebaseAuthInvalidCredentialsException) {
                     // Invalid request
                 } else if (e is FirebaseTooManyRequestsException) {
+                    Logger.w("Exceeded per phone number quota for sending verification codes.")
                     // The SMS quota for the project has been exceeded
                 }
 
@@ -101,9 +106,11 @@ class VerificationFragment : BaseFragment<FragmentVerificationBinding>() {
         }
         // [END start_phone_auth]
     }
+
     private fun verifyPhoneNumberWithCode(verificationId: String?, code: String) {
         // [START verify_with_code]
         val credential = PhoneAuthProvider.getCredential(verificationId!!, code)
+        signInWithPhoneAuthCredential(credential)
         // [END verify_with_code]
     }
 
@@ -136,30 +143,43 @@ class VerificationFragment : BaseFragment<FragmentVerificationBinding>() {
                 ?.addOnCompleteListener(it) { task ->
                     if (task.isSuccessful) {
                         // Sign in success, update UI with the signed-in user's information
-
+                        Toast.makeText(context, "thành công", Toast.LENGTH_LONG).show()
                         //val user = task.result?.user
                     } else {
                         // Sign in failed, display a message and update the UI
                         if (task.exception is FirebaseAuthInvalidCredentialsException) {
                             // The verification code entered was invalid
                         }
+                        Toast.makeText(context, "thất bại", Toast.LENGTH_LONG).show()
                         // Update UI
                     }
                 }
         }
     }
 
-    private fun updateUI(user: FirebaseUser? = auth?.currentUser) {
 
+    private fun getCode(): String {
+
+        binding.apply {
+            return "${num1Very.text}${num2Very.text}${num3Very.text}${num4Very.text}${num5Very.text}${num6Very.text}"
+        }
     }
 
     override fun initAction() {
         super.initAction()
-      //  startPhoneNumberVerification("+84399214349")
-      //  startPhoneNumberVerification("+840399214349")
         binding.btnVeryToMain.setOnClickListener {
-
+            val code = getCode()
+            Logger.d(code)
+            verifyPhoneNumberWithCode(storedVerificationId, code)
         }
+    }
+
+    override fun initDataSaveArgs() {
+        super.initDataSaveArgs()
+        //HERE NEED
+       // Toast.makeText(context, "+84${args.phone}", Toast.LENGTH_LONG).show()
+        startPhoneNumberVerification("+84${args.phone}")
+        //399214349 0582639863
     }
 
 }

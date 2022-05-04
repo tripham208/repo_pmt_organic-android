@@ -11,7 +11,9 @@ import androidx.navigation.fragment.findNavController
 import com.example.myapplication.datn.R
 import com.example.myapplication.datn.databinding.FragmentLoginOrRegisterBinding
 import com.example.myapplication.datn.ui.base.BaseFragment
+import com.google.firebase.auth.PhoneAuthOptions
 import dagger.hilt.android.AndroidEntryPoint
+import java.util.concurrent.TimeUnit
 
 @AndroidEntryPoint
 class LoginOrRegisterFragment : BaseFragment<FragmentLoginOrRegisterBinding>(),
@@ -33,8 +35,6 @@ class LoginOrRegisterFragment : BaseFragment<FragmentLoginOrRegisterBinding>(),
         binding.btnNextLogin.setOnClickListener(this)
 
 
-      //  viewModel.getMarsPhotos()
-
     }
 
     override fun onClick(p0: View?) {
@@ -45,7 +45,8 @@ class LoginOrRegisterFragment : BaseFragment<FragmentLoginOrRegisterBinding>(),
     }
 
     private fun handleClickLogin() {
-        findNavController().navigate(R.id.action_loginOrRegisterFragment_to_verificationFragment)
+        val action = LoginOrRegisterFragmentDirections.actionLoginOrRegisterFragmentToVerificationFragment(binding.edPhoneLogin.text.toString().toInt())
+        findNavController().navigate(action)
     }
 
 }

@@ -4,7 +4,9 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.myapplication.datn.R
+import com.example.myapplication.datn.database.AppAPI
 import com.example.myapplication.datn.databinding.CardProductListBinding
 import com.example.myapplication.datn.databinding.ProductCardBinding
 import com.example.myapplication.datn.model.entity.Product
@@ -63,6 +65,7 @@ class ProductFavoriteAdapter(val context: Context) : BaseListAdapter<Product>(Co
         private val number = itemBinding.tvValueCardProductItem
         private val card = itemBinding.cardProductItem
         private val unit = itemBinding.tvUnitCardProductItem
+        private val img = itemBinding.imgCardProductItem
 
 
         init {
@@ -82,7 +85,10 @@ class ProductFavoriteAdapter(val context: Context) : BaseListAdapter<Product>(Co
             unit.text = data.donvi
             number.text =
                 context.resources.getString(R.string.vnd_format, data.dongia.toStringFormat())
-
+            Glide.with (context)
+                .load ( "${AppAPI.IMG_URL}${data.anh}")
+                .fitCenter()
+                .into (img);
         }
     }
 

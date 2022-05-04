@@ -4,7 +4,9 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.myapplication.datn.R
+import com.example.myapplication.datn.database.AppAPI
 import com.example.myapplication.datn.databinding.ProductCardBinding
 import com.example.myapplication.datn.model.entity.Product
 import com.example.myapplication.datn.ui.base.BaseListAdapter
@@ -62,6 +64,7 @@ class ProductAdapter (val context: Context): BaseListAdapter<Product>(ContactDif
         private val name = itemBinding.itemCardName
         private val number = itemBinding.itemCardValue
         private val card = itemBinding.itemCard
+        private val img = itemBinding.itemCardImage
 
         init {
             if (adapterPosition != RecyclerView.NO_POSITION) {
@@ -78,6 +81,10 @@ class ProductAdapter (val context: Context): BaseListAdapter<Product>(ContactDif
         override fun bind(data: Product) {
             name.text = data.ten
             number.text = context.resources.getString(R.string.vnd_format, data.dongia.toStringFormat())
+            Glide.with (context)
+                .load ( "${AppAPI.IMG_URL}${data.anh}")
+                .fitCenter()
+                .into (img);
         }
     }
 

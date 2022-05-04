@@ -10,6 +10,8 @@ interface IProductRepository {
     suspend fun update(product: Product)
     suspend fun getProductId(id: Int):Product
     suspend fun getFromAPI()
+    suspend fun search(string: String):List<Product>
+    suspend fun searchType(id: Int):List<Product>
 
 
 }

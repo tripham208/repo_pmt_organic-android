@@ -15,7 +15,7 @@ import com.example.myapplication.datn.utils.Logger
 class OrderAdapter :
     BaseListAdapter<Order>(ContactDiffUtils()) {
 
-    var itemSelected: ((Int) -> Unit)? = null
+    var itemSelected: ((Order) -> Unit)? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseItemViewHolder {
         val binding =
@@ -42,7 +42,7 @@ class OrderAdapter :
     }
 
     private fun onItemSelected(position: Int) {
-        itemSelected?.invoke(currentList[position].id)
+        itemSelected?.invoke(currentList[position])
     }
 
 

@@ -1,39 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:title="Rau">
+    <item android:title="@string/vegetable">
         <menu>
             <item
                 android:id="@+id/draw1"
                 android:checkable="true"
-                android:icon="@drawable/ic_baseline_person_24"
-                android:title="@string/email" />
+                android:title="@string/vegetable1" />
             <item
                 android:id="@+id/draw2"
                 android:checkable="true"
-                android:icon="@drawable/ic_baseline_phone_24"
-                android:title="@string/email" />
+                android:title="@string/vegetable2" />
             <item
                 android:id="@+id/draw3"
                 android:checkable="true"
-                android:icon="@drawable/ic_baseline_person_24"
-                android:title="@string/email" />
+                android:title="@string/vegetable3" />
         </menu>
     </item>
-    <item android:title="Head"
+    <item android:title="@string/meat"
         >
         <menu>
             <item
+                android:id="@+id/draw4"
                 android:checkable="true"
-                android:icon="@drawable/ic_baseline_person_24"
-                android:title="@string/email" />
+                android:title="@string/meat1" />
             <item
+                android:id="@+id/draw5"
                 android:checkable="true"
-                android:icon="@drawable/ic_baseline_phone_24"
-                android:title="@string/email" />
+                android:title="@string/meat2" />
             <item
+                android:id="@+id/draw6"
                 android:checkable="true"
-                android:icon="@drawable/ic_baseline_person_24"
-                android:title="@string/email" />
+                android:title="@string/meat3" />
+        </menu>
+    </item>
+    <item android:title="@string/fruit"
+        >
+        <menu>
+            <item
+                android:id="@+id/draw7"
+                android:checkable="true"
+                android:title="@string/fruit1" />
         </menu>
     </item>
 </menu>

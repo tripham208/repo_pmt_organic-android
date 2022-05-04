@@ -25,6 +25,10 @@ class CartViewModel @Inject constructor(
     val historyResult: LiveData<List<Order>>
         get() = _history
 
+    private val _historyDetail = MutableLiveData<List<DetailOrder>>()
+    val historyResultDetail: LiveData<List<DetailOrder>>
+        get() = _historyDetail
+
     fun deleteCart(item: Order) = coroutineScope.launch {
         iOrderRepository.deleteCart(item)
     }
@@ -54,11 +58,16 @@ class CartViewModel @Inject constructor(
     fun getHistoryOrder() {
         coroutineScope.launch {
             val user = iUserRepository.getUser()
-            val list = iOrderRepository.getHistoryAPI(user.id)
-            _history.postValue(list)
+            val list = user.id?.let { iOrderRepository.getHistoryAPI(it) }
+            _history.postValue(list!!)
         }
+    }
 
-
+    fun getDetailOrder(id: Int) {
+        coroutineScope.launch {
+            val list = iOrderRepository.getOrderDetailsAPI(id)
+            _historyDetail.postValue(list)
+        }
     }
 
     init {

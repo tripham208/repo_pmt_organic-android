@@ -13,15 +13,19 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class UserViewModel @Inject constructor(private val iUserRepository: IUserRepository) : BaseViewModel() {
+class UserViewModel @Inject constructor(private val iUserRepository: IUserRepository) :
+    BaseViewModel() {
     val user: LiveData<User> = iUserRepository.user
 
     private val _loginResult = MutableLiveData<Int>()
     val loginResult: LiveData<Int>
         get() = _loginResult
 
+    private val _registerResult = MutableLiveData<Boolean>()
+    val registerResult: LiveData<Boolean>
+        get() = _registerResult
+
     fun clickLogin(username: String, pass: String) {
-        Logger.d("HERE")
         coroutineScope.launch {
             val invalid = checkInvalidInput(pass)
             Logger.d("$invalid")
@@ -32,6 +36,7 @@ class UserViewModel @Inject constructor(private val iUserRepository: IUserReposi
             }
         }
     }
+
     private suspend fun checkLogin(username: String, pass: String) {
         val isSuccess = iUserRepository.checkLogin(username, pass)
         if (isSuccess) {
@@ -41,17 +46,27 @@ class UserViewModel @Inject constructor(private val iUserRepository: IUserReposi
         }
     }
 
-    private suspend fun checkInvalidInput(pass: String): Boolean {
+    private fun checkInvalidInput(pass: String): Boolean {
         return pass.length < 6
     }
 
-    companion object{
+    fun register(user: User) {
+        coroutineScope.launch {
+            if (iUserRepository.register(user))
+                _registerResult.postValue(true)
+            else
+                _registerResult.postValue(false)
+        }
+
+    }
+
+
+    companion object {
         @StringRes
         const val INVALID = R.string.pass_invalid
         const val SUCCESS = R.string.success
         const val FAIL = R.string.fail
     }
-
 
 
 }

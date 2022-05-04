@@ -7,6 +7,36 @@
     tools:context=".ui.account.AccountInformationFragment">
 
 
+    <ImageView
+        android:id="@+id/imageView10"
+        android:layout_width="@dimen/image_size"
+        android:layout_height="@dimen/image_size"
+        android:src="@drawable/logo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView23"
+        style="@style/header_page"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/accDetail"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView10" />
+
+    <View
+        android:id="@+id/divider7"
+        android:layout_width="409dp"
+        android:layout_height="1dp"
+        android:layout_marginTop="16dp"
+        android:background="?android:attr/listDivider"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView23" />
+
     <TextView
         android:id="@+id/textView12"
         android:layout_width="wrap_content"
@@ -14,10 +44,67 @@
         android:layout_marginStart="@dimen/margin_layout"
 
         android:layout_marginTop="@dimen/_24dp"
-        android:text="TextView"
+        android:text="Username:"
         android:textSize="@dimen/text_medium"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageButton2" />
+
+    <TextView
+        android:id="@+id/tvUsernameAccDetail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="140dp"
+        android:textSize="@dimen/text_medium"
+        app:layout_constraintBottom_toBottomOf="@+id/textView12"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textView12"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/tvNameAccDetail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:textSize="@dimen/text_medium"
+        app:layout_constraintBottom_toBottomOf="@+id/imageButton2"
+        app:layout_constraintStart_toEndOf="@+id/imageButton2"
+        app:layout_constraintTop_toTopOf="@+id/imageButton2"
+        app:layout_constraintVertical_bias="0.45" />
+
+    <TextView
+        android:id="@+id/tvEmailAccDetail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="140dp"
+
+        android:textSize="@dimen/text_medium"
+        app:layout_constraintBottom_toBottomOf="@+id/textView13"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textView13"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/tvAddressAccDetail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="140dp"
+
+        android:textSize="@dimen/text_medium"
+        app:layout_constraintBottom_toBottomOf="@+id/textView15"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textView15"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/tvPhoneAccDetail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="140dp"
+        android:textSize="@dimen/text_medium"
+        app:layout_constraintBottom_toBottomOf="@+id/textView16"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textView16"
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/textView13"
@@ -25,11 +112,11 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/margin_layout"
 
-        android:layout_marginTop="68dp"
-        android:text="TextView"
+        android:layout_marginTop="24dp"
+        android:text="@string/email_accdetail"
         android:textSize="@dimen/text_medium"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageButton2" />
+        app:layout_constraintTop_toBottomOf="@+id/textView12" />
 
     <TextView
         android:id="@+id/textView15"
@@ -37,11 +124,11 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/margin_layout"
 
-        android:layout_marginTop="108dp"
-        android:text="TextView"
+        android:layout_marginTop="24dp"
+        android:text="Địa chỉ:"
         android:textSize="@dimen/text_medium"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageButton2" />
+        app:layout_constraintTop_toBottomOf="@+id/textView13" />
 
     <TextView
         android:id="@+id/textView16"
@@ -49,20 +136,21 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/margin_layout"
 
-        android:layout_marginTop="164dp"
-        android:text="TextView"
+        android:layout_marginTop="24dp"
+        android:text="@string/phoneAccDetail"
         android:textSize="@dimen/text_medium"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageButton2" />
+        app:layout_constraintTop_toBottomOf="@+id/textView15" />
 
     <ImageButton
         android:id="@+id/imageButton2"
         android:layout_width="@dimen/_64dp"
         android:layout_height="@dimen/_64dp"
         android:layout_marginStart="@dimen/margin_layout"
-        android:layout_marginTop="@dimen/margin_layout"
+        android:layout_marginTop="16dp"
         android:contentDescription="@string/logo"
         android:src="@android:drawable/btn_star_big_on"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/divider7" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

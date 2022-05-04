@@ -39,5 +39,16 @@ interface ProductDao {
     )
     suspend fun getProduct(id: Int): Product
 
+    @Query(
+        "SELECT * FROM product " +
+                "WHERE name LIKE '%' || :search || '%'"
+    )
+    suspend fun searchProduct(search: String): List<Product>
+
+    @Query(
+        "SELECT * FROM product " +
+                "WHERE type = :search"
+    )
+    suspend fun searchProductType(search: Int): List<Product>
 
 }

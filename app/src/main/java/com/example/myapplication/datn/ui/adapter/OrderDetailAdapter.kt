@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.myapplication.datn.R
 import com.example.myapplication.datn.database.AppAPI
+import com.example.myapplication.datn.databinding.CardOrderDetailListBinding
 import com.example.myapplication.datn.databinding.ViewProductCartBinding
 import com.example.myapplication.datn.model.entity.DetailOrder
 import com.example.myapplication.datn.model.entity.Product
@@ -20,16 +21,15 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class ProductCartAdapter(val context: Context, val viewModel: HomeViewModel) :
+class OrderDetailAdapter (val context: Context, val viewModel: HomeViewModel) :
     BaseListAdapter<DetailOrder>(ContactDiffUtils()) {
 
     var itemSelected: ((Int) -> Unit)? = null
-    var detailChange: ((DetailOrder) -> Unit)? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseItemViewHolder {
         val binding =
-            ViewProductCartBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return ContactHolder(binding, viewModel, this::onItemSelected, this::onChange)
+            CardOrderDetailListBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return ContactHolder(binding, viewModel, this::onItemSelected)
     }
 
     override fun onBindViewHolder(holder: BaseItemViewHolder, position: Int) {
@@ -54,10 +54,6 @@ class ProductCartAdapter(val context: Context, val viewModel: HomeViewModel) :
         itemSelected?.invoke(currentList[position].idsanpham)
     }
 
-    private fun onChange(position: Int, number: Int) {
-        val detail = currentList[position].copy(soluong = number)
-        detailChange?.invoke(detail)
-    }
 
     class ContactDiffUtils : BaseDiffUtilItemCallback<DetailOrder>() {
 
@@ -72,29 +68,27 @@ class ProductCartAdapter(val context: Context, val viewModel: HomeViewModel) :
     }
 
     inner class ContactHolder(
-        itemBinding: ViewProductCartBinding,
+        itemBinding: CardOrderDetailListBinding,
         private val homeViewModel: HomeViewModel,
-        itemCb: ((Int) -> Unit),
-        change: ((Int, Int) -> Unit)
+        itemCb: ((Int) -> Unit)
     ) : BaseItemViewHolder(itemBinding) {
-        private val name = itemBinding.tvNameCardProductItemCart
+        private val name = itemBinding.tvNameOrderDetailItem
         private val number = itemBinding.tvValueCardProductItemCart
-        private val unit = itemBinding.tvUnitCardProductItemCart
-        private val card = itemBinding.cardProductItem
-        private val numberPicker = itemBinding.numberCardProductItemCart
-        private val img = itemBinding.imgCardProductItemCart
+        private val unit = itemBinding.tvUnitOrderDetailItem
+        private val quantity = itemBinding.tvQuantityOrderDetailItem
+        private val card = itemBinding.cardOrderDetailItem
+        private val img = itemBinding.imgOrderDetailItem
 
         init {
             if (adapterPosition != RecyclerView.NO_POSITION) {
                 itemCb.invoke(adapterPosition)
                 Logger.d(adapterPosition.toString())
+//                itemSelected?.invoke(currentList[adapterPosition])
             }
             card.setOnClickListener {
                 itemCb.invoke(adapterPosition)
             }
-            numberPicker.changeNumber = {
-                change.invoke(adapterPosition, it)
-            }
+
 
         }
 
@@ -102,21 +96,21 @@ class ProductCartAdapter(val context: Context, val viewModel: HomeViewModel) :
             GlobalScope.launch(Dispatchers.Main) {
                 var res: Product? = null
                 res = homeViewModel.getProduct(data.idsanpham)
-
                 name.text = res?.ten
                 unit.text = res?.donvi
                 number.text =
                     context.resources.getString(R.string.vnd_format, data.dongia.toStringFormat())
-                numberPicker.setNumber(data.soluong)
+                quantity.text=
+                    context.resources.getString(R.string.quantity, data.soluong)
                 Glide.with (context)
                     .load ( "${AppAPI.IMG_URL}${res?.anh}")
                     .fitCenter()
                     .into (img);
+
                 val result = withContext(Dispatchers.Default) {
 
                 }
             }
         }
     }
-
 }
