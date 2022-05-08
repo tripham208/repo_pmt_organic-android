@@ -17,7 +17,7 @@ data class DetailOrder(
     @Json(name = "idsanpham")
     @ColumnInfo(name = "idProduct") val idsanpham: Int,
     @Json(name = "soluong")
-    @ColumnInfo(name = "quantity") val soluong: Int,
+    @ColumnInfo(name = "quantity") var soluong: Int,
     @Json(name = "dongia")
     @ColumnInfo(name = "unitPrice") val dongia: Int,
     @Json(name = "giamgia")

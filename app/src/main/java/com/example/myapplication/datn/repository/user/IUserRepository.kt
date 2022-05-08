@@ -8,4 +8,6 @@ interface IUserRepository {
     suspend fun checkLogin(username: String, pass: String): Boolean
     suspend fun getUser(): User
     suspend fun register(user: User):Boolean
+    suspend fun updateUser(user: User)
+    suspend fun logoutUser()
 }

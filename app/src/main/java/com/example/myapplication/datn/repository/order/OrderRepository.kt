@@ -22,39 +22,57 @@ class OrderRepository @Inject constructor(
 
     override suspend fun updateCart(item: Order) {
         orderDao.updates(item)
-        api.updateCart(item)
+        api.updateCart(item.id, item)
     }
 
     override suspend fun insertCart(item: Order) {
         orderDao.insert(item)
     }
 
-    override suspend fun deleteCart(item: Order) {
-        orderDao.delete(item)
+    override suspend fun deleteCart() {
+        orderDao.deleteAll()
     }
 
     override suspend fun updateDetail(item: DetailOrder) {
         orderDetailOrder.updates(item)
-        api.addDetail(item)
+        item.id?.let { api.updateDetail(it, item) }
+        // getDetailCart()
     }
 
     override suspend fun insertDetail(item: DetailOrder) {
-            if (
-                orderDetailOrder.getItem(item.idsanpham) != null
-            ) {
-                val old = orderDetailOrder.getItem(item.idsanpham)
-                val new = item.copy(
-                    soluong = old.soluong + item.soluong
-                )
-                updateDetail(new)
-            }else{
-                orderDetailOrder.insert(item)
-                api.addDetail(item)
+        val detail = orderDetailOrder.getItem(item.idsanpham)
+        if (detail != null) {
+            detail.soluong += item.soluong
+            updateDetail(detail)
+        } else {
+            api.addDetail(item)
+            getDetailCart()
+        }
+
+    }
+
+    override suspend fun getDetailCart() {
+        cart.value?.id.let {
+            if (it != null) {
+                api.getDetails(it).forEach {
+                    orderDetailOrder.insert(it)
+                }
             }
+        }
+    }
+
+    override suspend fun booking(order: Order):Order {
+        val newCart = api.booking(order.id, order)
+        orderDao.deleteAll()
+        orderDao.insert(newCart)
+        orderDetailOrder.deleteAll()
+        return api.getOrder(order.id)
+
     }
 
     override suspend fun deleteDetail(item: DetailOrder) {
         orderDetailOrder.delete(item)
+        item.id?.let { api.deleteDetail(it) }
     }
 
     override suspend fun getOrderDetailsAPI(id: Int): List<DetailOrder> {
@@ -66,10 +84,8 @@ class OrderRepository @Inject constructor(
     }
 
     override suspend fun getHistoryAPI(id: Int): List<Order> {
-       return api.getOrdersByIdUser(id)
+        return api.getOrdersByIdUser(id)
     }
-
-
 
 
 }

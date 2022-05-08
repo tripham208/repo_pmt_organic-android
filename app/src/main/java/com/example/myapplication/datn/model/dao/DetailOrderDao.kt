@@ -15,7 +15,7 @@ interface DetailOrderDao {
     @Query("SELECT * FROM detail_order ")
     fun getAllToLiveData(): LiveData<List<DetailOrder>>
 
-    @Insert(onConflict = OnConflictStrategy.IGNORE) //skip if same content
+    @Insert(onConflict = OnConflictStrategy.REPLACE) //skip if same content
     suspend fun insert(item: DetailOrder)
 
     @Delete

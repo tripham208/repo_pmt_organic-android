@@ -13,6 +13,7 @@ import com.example.myapplication.datn.databinding.FragmentPasswordBinding
 import com.example.myapplication.datn.ui.base.BaseFragment
 import com.example.myapplication.datn.ui.cart.CartViewModel
 import com.example.myapplication.datn.ui.login.UserViewModel
+import com.example.myapplication.datn.utils.Checker
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -26,6 +27,10 @@ class AccountFragment : BaseFragment<FragmentAccountBinding>() {
         return FragmentAccountBinding.inflate(inflater, container, false)
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+    }
+
     override fun initView() {
         super.initView()
 
@@ -33,16 +38,31 @@ class AccountFragment : BaseFragment<FragmentAccountBinding>() {
 
     override fun initAction() {
         super.initAction()
-        binding.tvNameAccount.setOnClickListener {
-            findNavController().navigate(R.id.action_mainFragment2_to_accountInformationFragment)
+        binding.apply {
+            tvNameAccount.setOnClickListener {
+                findNavController().navigate(R.id.action_mainFragment2_to_accountInformationFragment)
+            }
+            btnLogout.setOnClickListener {
+                viewModel.logout()
+                Checker.HAS_USER = false
+                findNavController().navigate(R.id.action_mainFragment2_to_loginFragment)
+
+            }
+            tvAddressAccount.setOnClickListener {
+                findNavController().navigate(R.id.action_mainFragment2_to_addressFragment)
+            }
         }
+
 
     }
 
     override fun observerLiveData() {
         super.observerLiveData()
         viewModel.user.observe(viewLifecycleOwner) {
-            binding.tvNameAccount.text = it.name
+            if (it != null) {
+                binding.tvNameAccount.text = it.name
+            }
+
         }
     }
 }

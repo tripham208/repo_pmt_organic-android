@@ -8,7 +8,7 @@
 
 
     <Button
-        android:id="@+id/button5"
+        android:id="@+id/btnLogout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/margin_layout"
@@ -65,7 +65,7 @@
         app:layout_constraintTop_toBottomOf="@+id/imageButton" />
 
     <TextView
-        android:id="@+id/textView9"
+        android:id="@+id/tvAddressAccount"
         android:layout_width="match_parent"
         android:gravity="center_vertical"
         android:layout_height="32dp"
@@ -100,7 +100,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView9" />
+        app:layout_constraintTop_toBottomOf="@+id/tvAddressAccount" />
 
     <TextView
         android:id="@+id/textView11"

@@ -1,18 +1,18 @@
-package com.example.myapplication.datn.ui.adapter
+package com.example.myapplication.datn.ui.order
 
 import android.annotation.SuppressLint
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.myapplication.datn.R
 import com.example.myapplication.datn.databinding.CardOrderListBinding
-import com.example.myapplication.datn.model.entity.DetailOrder
 import com.example.myapplication.datn.model.entity.Order
 import com.example.myapplication.datn.ui.base.BaseListAdapter
-import com.example.myapplication.datn.ui.cart.CartViewModel
 import com.example.myapplication.datn.utils.Logger
+import com.example.myapplication.datn.utils.toStringFormat
 
-class OrderAdapter :
+class OrderAdapter(val context: Context) :
     BaseListAdapter<Order>(ContactDiffUtils()) {
 
     var itemSelected: ((Order) -> Unit)? = null
@@ -80,8 +80,10 @@ class OrderAdapter :
         }
 
         override fun bind(data: Order) {
-            id.text = data.id.toString()
-            sum.text = data.tongtien.toString()
+            id.text = context.resources.getString(R.string.order_id, data.id)
+            sum.text =
+                context.resources.getString(R.string.order_sum, data.tongtien.toStringFormat())
+            time.text = context.resources.getString(R.string.order_time, data.thoigian)
         }
     }
 

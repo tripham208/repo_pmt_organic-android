@@ -19,6 +19,7 @@ import com.example.myapplication.datn.ui.MainFragmentDirections
 import com.example.myapplication.datn.ui.base.BaseFragment
 import com.example.myapplication.datn.ui.cart.CartViewModel
 import com.example.myapplication.datn.ui.home.HomeViewModel
+import com.example.myapplication.datn.utils.Checker
 import com.example.myapplication.datn.utils.toStringFormat
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -59,58 +60,34 @@ class ProductDetailFragment : BaseFragment<FragmentProductDetailBinding>() {
                 findNavController().navigate(action)
             }
             btnAddCartDetail.setOnClickListener {
-                if (cartViewModel.cart.value != null) {
-                    val detail = cartViewModel.cart.value!!.id.let { it1 ->
-                        args.product?.id?.let { it2 ->
-                            args.product?.dongia?.let { it3 ->
-                                DetailOrder(
-                                    id = null,
-                                    idhoadon = it1,
-                                    idsanpham = it2,
-                                    soluong = binding.numberPicker2.getNumber(),
-                                    dongia = it3,
-                                    giamgia = null
-                                )
-                            }
-                        }
-                    }
-                    if (detail != null) {
-                        cartViewModel.insertDetail(detail)
-                    }
+                if (Checker.HAS_USER == false) {
+                    findNavController().navigate(R.id.action_productDetailFragment_to_loginFragment)
                 } else {
-                    cartViewModel.insertCart(
-                        Order(
-                            id = 1,
-                            idkhachhang = 1,
-                            idnhanvien = 1,
-                            tongtien = 0,
-                            thoigian = null, thanhtoan = 0,
-                            loaidon = 1
-                        )
-                    )
-                    val detail = cartViewModel.cart.value!!.id.let { it1 ->
-                        args.product?.id?.let { it2 ->
-                            args.product?.dongia?.let { it3 ->
-                                DetailOrder(
-                                    id = null,
-                                    idhoadon = it1,
-                                    idsanpham = it2,
-                                    soluong = binding.numberPicker2.getNumber(),
-                                    dongia = it3,
-                                    giamgia = null
-                                )
+                    if (cartViewModel.cart.value != null) {
+                        val detail = cartViewModel.cart.value!!.id.let { it1 ->
+                            args.product?.id?.let { it2 ->
+                                args.product?.dongia?.let { it3 ->
+                                    DetailOrder(
+                                        id = null,
+                                        idhoadon = it1,
+                                        idsanpham = it2,
+                                        soluong = binding.numberPicker2.getNumber(),
+                                        dongia = it3,
+                                        giamgia = null
+                                    )
+                                }
                             }
                         }
+                        if (detail != null) {
+                            cartViewModel.insertDetail(detail)
+                        }
                     }
-                    if (detail != null) {
-                        cartViewModel.insertDetail(detail)
-                    }
+                    Toast.makeText(
+                        context,
+                        resources.getString(R.string.add_cart_done, args.product?.ten),
+                        Toast.LENGTH_LONG
+                    ).show()
                 }
-                Toast.makeText(
-                    context,
-                    resources.getString(R.string.add_cart_done, args.product?.ten),
-                    Toast.LENGTH_LONG
-                ).show()
             }
         }
     }
@@ -130,10 +107,11 @@ class ProductDetailFragment : BaseFragment<FragmentProductDetailBinding>() {
                 } else {
                     binding.imgBtnAddFavoriteDetailProduct.setImageResource(R.drawable.ic_baseline_favorite_border_24)
                 }
-                Glide.with (this@ProductDetailFragment)
-                    .load ( "${AppAPI.IMG_URL}${it?.anh}")
-                    .fitCenter().error(R.drawable.ic_baseline_error_24).placeholder(R.drawable.ic_baseline_downloading_24)
-                    .into (imgDetailProduct);
+                Glide.with(this@ProductDetailFragment)
+                    .load("${AppAPI.IMG_URL}${it?.anh}")
+                    .fitCenter().error(R.drawable.ic_baseline_error_24)
+                    .placeholder(R.drawable.ic_baseline_downloading_24)
+                    .into(imgDetailProduct);
             }
         }
 

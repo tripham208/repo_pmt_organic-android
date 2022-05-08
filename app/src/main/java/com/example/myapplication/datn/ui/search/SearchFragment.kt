@@ -1,7 +1,6 @@
 package com.example.myapplication.datn.ui.search
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,12 +8,9 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.myapplication.datn.R
-import com.example.myapplication.datn.databinding.FragmentFavoriteBinding
 import com.example.myapplication.datn.databinding.FragmentSearchBinding
-import com.example.myapplication.datn.ui.MainFragmentDirections
-import com.example.myapplication.datn.ui.adapter.ProductFavoriteAdapter
+import com.example.myapplication.datn.ui.favorite.ProductFavoriteAdapter
 import com.example.myapplication.datn.ui.base.BaseFragment
-import com.example.myapplication.datn.ui.detail.ProductDetailFragmentArgs
 import com.example.myapplication.datn.ui.home.HomeViewModel
 import dagger.hilt.android.AndroidEntryPoint
 

@@ -1,18 +1,13 @@
 package com.example.myapplication.datn.ui.favorite
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
-import com.example.myapplication.datn.R
 import com.example.myapplication.datn.databinding.FragmentFavoriteBinding
-import com.example.myapplication.datn.databinding.FragmentLoginOrRegisterBinding
 import com.example.myapplication.datn.ui.MainFragmentDirections
-import com.example.myapplication.datn.ui.adapter.ProductAdapter
-import com.example.myapplication.datn.ui.adapter.ProductFavoriteAdapter
 import com.example.myapplication.datn.ui.base.BaseFragment
 import com.example.myapplication.datn.ui.home.HomeViewModel
 import dagger.hilt.android.AndroidEntryPoint

@@ -24,6 +24,8 @@ data class Order(
     @ColumnInfo(name = "pay") val thanhtoan: Int,
     @Json(name = "loaidon")
     @ColumnInfo(name = "typeOrder") val loaidon: Int,
+    @Json(name = "ghichu")
+    @ColumnInfo(name = "note") val ghichu: String?,
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readInt(),
@@ -32,18 +34,20 @@ data class Order(
         parcel.readInt(),
         parcel.readString(),
         parcel.readInt(),
-        parcel.readInt()
+        parcel.readInt(),
+        parcel.readString()
     ) {
     }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
-        parcel.writeValue(id)
+        parcel.writeInt(id)
         parcel.writeInt(idkhachhang)
         parcel.writeInt(idnhanvien)
         parcel.writeInt(tongtien)
         parcel.writeString(thoigian)
         parcel.writeInt(thanhtoan)
         parcel.writeInt(loaidon)
+        parcel.writeString(ghichu)
     }
 
     override fun describeContents(): Int {
@@ -60,4 +64,3 @@ data class Order(
         }
     }
 }
-

@@ -24,6 +24,10 @@ class HomeViewModel @Inject constructor(
     val search: LiveData<List<Product>>
         get() = _search
 
+    private val _loading = MutableLiveData<Boolean>()
+    val loading: LiveData<Boolean>
+        get() = _loading
+
     fun update(product: Product) = coroutineScope.launch {
         iProductRepository.update(product)
     }
@@ -36,21 +40,23 @@ class HomeViewModel @Inject constructor(
         return res
     }
 
-     fun search(string: String) {
-         coroutineScope.launch {
-             val list = iProductRepository.search(string)
-             _search.postValue(list)
-         }
+    fun search(string: String) {
+        coroutineScope.launch {
+            val list = iProductRepository.search(string)
+            _search.postValue(list)
+        }
     }
+
     fun searchType(id: Int) {
         coroutineScope.launch {
             val list = iProductRepository.searchType(id)
             _search.postValue(list)
         }
     }
-    init {
-        coroutineScope.launch {
-            iProductRepository.getFromAPI()
-        }
+
+    fun getData() = coroutineScope.launch {
+        iProductRepository.getFromAPI()
+        _loading.postValue(false)
     }
+
 }

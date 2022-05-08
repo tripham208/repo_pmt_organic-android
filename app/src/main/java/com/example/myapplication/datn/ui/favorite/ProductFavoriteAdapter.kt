@@ -1,4 +1,4 @@
-package com.example.myapplication.datn.ui.adapter
+package com.example.myapplication.datn.ui.favorite
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -8,7 +8,6 @@ import com.bumptech.glide.Glide
 import com.example.myapplication.datn.R
 import com.example.myapplication.datn.database.AppAPI
 import com.example.myapplication.datn.databinding.CardProductListBinding
-import com.example.myapplication.datn.databinding.ProductCardBinding
 import com.example.myapplication.datn.model.entity.Product
 import com.example.myapplication.datn.ui.base.BaseListAdapter
 import com.example.myapplication.datn.utils.Logger

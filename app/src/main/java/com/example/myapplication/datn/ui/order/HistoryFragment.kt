@@ -12,6 +12,7 @@ import com.example.myapplication.datn.databinding.FragmentVerificationBinding
 import com.example.myapplication.datn.ui.adapter.FragmentAdapter
 import com.example.myapplication.datn.ui.adapter.HistoryFragmentAdapter
 import com.example.myapplication.datn.ui.base.BaseFragment
+import com.example.myapplication.datn.utils.Checker
 import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -25,12 +26,19 @@ class HistoryFragment : BaseFragment<FragmentHistoryBinding>() {
         return FragmentHistoryBinding.inflate(inflater, container, false)
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        if (Checker.HAS_USER == false)
+            findNavController().navigate(R.id.action_mainFragment2_to_loginFragment)
+    }
+
     override fun initAction() {
         super.initAction()
     }
 
     override fun initView() {
         super.initView()
+
         binding.viewPagerHistory.adapter = HistoryFragmentAdapter(requireActivity())
         TabLayoutMediator(binding.tabHistory, binding.viewPagerHistory) { tab, position ->
             when (position) {

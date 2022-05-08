@@ -1,4 +1,4 @@
-package com.example.myapplication.datn.ui.adapter
+package com.example.myapplication.datn.ui.cart
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -25,11 +25,12 @@ class ProductCartAdapter(val context: Context, val viewModel: HomeViewModel) :
 
     var itemSelected: ((Int) -> Unit)? = null
     var detailChange: ((DetailOrder) -> Unit)? = null
+    var deleteSelected:  ((DetailOrder) -> Unit)? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseItemViewHolder {
         val binding =
             ViewProductCartBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return ContactHolder(binding, viewModel, this::onItemSelected, this::onChange)
+        return ContactHolder(binding, viewModel, this::onItemSelected, this::onChange,this::onItemDeleteSelected)
     }
 
     override fun onBindViewHolder(holder: BaseItemViewHolder, position: Int) {
@@ -53,6 +54,9 @@ class ProductCartAdapter(val context: Context, val viewModel: HomeViewModel) :
     private fun onItemSelected(position: Int) {
         itemSelected?.invoke(currentList[position].idsanpham)
     }
+    private fun onItemDeleteSelected(position: Int) {
+        deleteSelected?.invoke(currentList[position])
+    }
 
     private fun onChange(position: Int, number: Int) {
         val detail = currentList[position].copy(soluong = number)
@@ -75,7 +79,8 @@ class ProductCartAdapter(val context: Context, val viewModel: HomeViewModel) :
         itemBinding: ViewProductCartBinding,
         private val homeViewModel: HomeViewModel,
         itemCb: ((Int) -> Unit),
-        change: ((Int, Int) -> Unit)
+        change: ((Int, Int) -> Unit),
+        itemDelete: ((Int) -> Unit)
     ) : BaseItemViewHolder(itemBinding) {
         private val name = itemBinding.tvNameCardProductItemCart
         private val number = itemBinding.tvValueCardProductItemCart
@@ -83,6 +88,7 @@ class ProductCartAdapter(val context: Context, val viewModel: HomeViewModel) :
         private val card = itemBinding.cardProductItem
         private val numberPicker = itemBinding.numberCardProductItemCart
         private val img = itemBinding.imgCardProductItemCart
+        private val del = itemBinding.imgBtnDeleteCart
 
         init {
             if (adapterPosition != RecyclerView.NO_POSITION) {
@@ -94,6 +100,9 @@ class ProductCartAdapter(val context: Context, val viewModel: HomeViewModel) :
             }
             numberPicker.changeNumber = {
                 change.invoke(adapterPosition, it)
+            }
+            del.setOnClickListener {
+                itemDelete.invoke(adapterPosition)
             }
 
         }

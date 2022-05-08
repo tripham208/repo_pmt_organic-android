@@ -27,9 +27,10 @@ class UserRepository @Inject constructor(
             userDao.insert(x[0])
             x[0].id?.let { api.getCart(it) }?.let { it ->
                 orderDao.insert(it)
+                /*
                 api.getDetails(it.id).forEach {
                     detailOrderDao.insert(it)
-                }
+                }*/
             }
 
             return true
@@ -50,5 +51,17 @@ class UserRepository @Inject constructor(
             rs[0].id?.let { api.getCart(it) }?.let { orderDao.insert(it) }
         }
         return true
+    }
+
+
+    override suspend fun updateUser(user: User) {
+        user.id?.let { api.updateUser(it,user) }
+        userDao.updates(user)
+    }
+
+    override suspend fun logoutUser() {
+        userDao.deleteAll()
+        orderDao.deleteAll()
+        detailOrderDao.deleteAll()
     }
 }

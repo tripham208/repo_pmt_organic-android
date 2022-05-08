@@ -17,6 +17,9 @@ interface AppAPI {
     @GET("bill/cart/{id}")
     suspend fun getCart(@Path("id") id: Int): Order
 
+    @GET("bill/{id}")
+    suspend fun getOrder(@Path("id") id: Int): Order
+
     @GET("user/checklogin/{username}/{password}")
     suspend fun getUser(
         @Path("username") username: String,
@@ -32,19 +35,27 @@ interface AppAPI {
     @POST("bill-detail")
     suspend fun addDetail(@Body detailOrder: DetailOrder)
 
-    @POST("bill")
-    suspend fun updateCart(@Body order: Order)
+    @PUT("bill-detail/{id}")
+    suspend fun updateDetail(@Path("id") id: Int, @Body detailOrder: DetailOrder)
+
+    @DELETE("bill-detail/{id}")
+    suspend fun deleteDetail(@Path("id") id: Int)
+
+    @PUT("bill/{id}")
+    suspend fun updateCart(@Path("id") id: Int, @Body order: Order)
+
+    @PUT("bill/{id}")
+    suspend fun booking(@Path("id") id: Int, @Body order: Order): Order
 
     @POST("user")
     suspend fun register(@Body user: User): List<User>
 
+    @PUT("user/{id}")
+    suspend fun updateUser(@Path("id") id: Int, @Body user: User)
 
-    /*
-    @GET("category/update/{id}")
-    suspend fun updateCart(@Body order: ProductType,("id") id: Int)
-*/
+
     companion object {
-        private const val CODE = "debf-2405-4803-fc5d-d720-bdc9-366c-281d-7a41.ap.ngrok.io"
+        private const val CODE = "ddf0-2405-4803-fc5e-9610-8cd1-499b-64ce-c38d.ap.ngrok.io"
         const val BASE_URL = "https://$CODE/api/"
         const val IMG_URL = "https://$CODE"
     }

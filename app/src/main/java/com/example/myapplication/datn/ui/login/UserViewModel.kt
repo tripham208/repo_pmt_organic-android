@@ -9,6 +9,7 @@ import com.example.myapplication.datn.repository.user.IUserRepository
 import com.example.myapplication.datn.ui.base.BaseViewModel
 import com.example.myapplication.datn.utils.Logger
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -36,6 +37,11 @@ class UserViewModel @Inject constructor(private val iUserRepository: IUserReposi
             }
         }
     }
+    fun updateUser(user: User){
+        coroutineScope.launch {
+            iUserRepository.updateUser(user)
+        }
+    }
 
     private suspend fun checkLogin(username: String, pass: String) {
         val isSuccess = iUserRepository.checkLogin(username, pass)
@@ -46,15 +52,22 @@ class UserViewModel @Inject constructor(private val iUserRepository: IUserReposi
         }
     }
 
+    fun logout() {
+        coroutineScope.launch {
+            iUserRepository.logoutUser()
+        }
+    }
+
     private fun checkInvalidInput(pass: String): Boolean {
         return pass.length < 6
     }
 
     fun register(user: User) {
         coroutineScope.launch {
-            if (iUserRepository.register(user))
+            if (iUserRepository.register(user)) {
                 _registerResult.postValue(true)
-            else
+                _registerResult.value = false
+            } else
                 _registerResult.postValue(false)
         }
 

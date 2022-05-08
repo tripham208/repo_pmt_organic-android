@@ -29,8 +29,13 @@ class CartViewModel @Inject constructor(
     val historyResultDetail: LiveData<List<DetailOrder>>
         get() = _historyDetail
 
+    private val _orderBooking = MutableLiveData<Order>()
+    val orderBooking: LiveData<Order>
+        get() = _orderBooking
+
+
     fun deleteCart(item: Order) = coroutineScope.launch {
-        iOrderRepository.deleteCart(item)
+        iOrderRepository.deleteCart()
     }
 
     fun deleteDetail(item: DetailOrder) = coroutineScope.launch {
@@ -45,14 +50,8 @@ class CartViewModel @Inject constructor(
         iOrderRepository.updateDetail(item)
     }
 
-    fun insertCart(item: Order) = coroutineScope.launch {
-
-        iOrderRepository.insertCart(item)
-    }
-
     fun insertDetail(item: DetailOrder) = coroutineScope.launch {
         iOrderRepository.insertDetail(item)
-
     }
 
     fun getHistoryOrder() {
@@ -63,6 +62,20 @@ class CartViewModel @Inject constructor(
         }
     }
 
+    fun getCartDetail() {
+        coroutineScope.launch {
+            iOrderRepository.getDetailCart()
+        }
+
+    }
+
+    fun booking(order: Order) {
+        coroutineScope.launch {
+            val orderB = iOrderRepository.booking(order)
+            _orderBooking.postValue(orderB)
+        }
+    }
+
     fun getDetailOrder(id: Int) {
         coroutineScope.launch {
             val list = iOrderRepository.getOrderDetailsAPI(id)
@@ -70,8 +83,5 @@ class CartViewModel @Inject constructor(
         }
     }
 
-    init {
-
-    }
 
 }

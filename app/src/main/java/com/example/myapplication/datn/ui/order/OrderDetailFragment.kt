@@ -1,23 +1,17 @@
 package com.example.myapplication.datn.ui.order
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.myapplication.datn.R
-import com.example.myapplication.datn.databinding.FragmentCartBinding
 import com.example.myapplication.datn.databinding.FragmentOrderDetailBinding
 import com.example.myapplication.datn.model.entity.Product
-import com.example.myapplication.datn.ui.MainFragmentDirections
 import com.example.myapplication.datn.ui.adapter.OrderDetailAdapter
-import com.example.myapplication.datn.ui.adapter.ProductCartAdapter
 import com.example.myapplication.datn.ui.base.BaseFragment
 import com.example.myapplication.datn.ui.cart.CartViewModel
-import com.example.myapplication.datn.ui.detail.ProductDetailFragmentArgs
 import com.example.myapplication.datn.ui.home.HomeViewModel
 import com.example.myapplication.datn.utils.Logger
 import com.example.myapplication.datn.utils.toStringFormat

@@ -1,10 +1,8 @@
 package com.example.myapplication.datn.model.dao
 
 import androidx.lifecycle.LiveData
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
+import com.example.myapplication.datn.model.entity.Order
 import com.example.myapplication.datn.model.entity.Product
 import com.example.myapplication.datn.model.entity.User
 import kotlinx.coroutines.flow.Flow
@@ -24,5 +22,6 @@ interface UserDao {
     @Query("DELETE FROM user")
     suspend fun deleteAll()
 
-
+    @Update
+    suspend fun updates(vararg item: User)
 }

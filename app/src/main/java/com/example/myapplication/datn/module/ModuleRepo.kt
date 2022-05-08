@@ -1,5 +1,7 @@
 package com.example.myapplication.datn.module
 
+import com.example.myapplication.datn.repository.address.AddressRepository
+import com.example.myapplication.datn.repository.address.IAddressRepository
 import com.example.myapplication.datn.repository.order.IOrderRepository
 import com.example.myapplication.datn.repository.order.OrderRepository
 import com.example.myapplication.datn.repository.product.IProductRepository
@@ -22,4 +24,7 @@ interface ModuleRepo {
 
     @Binds
     fun provideIOrder(orderRepository: OrderRepository): IOrderRepository
+
+    @Binds
+    fun provideIAddress(orderRepository: AddressRepository): IAddressRepository
 }

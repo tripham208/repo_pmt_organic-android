@@ -1,10 +1,13 @@
 <resources>
     <string name="app_name">PMT Organic</string>
-    <!-- TODO: Remove or change this placeholder text -->
+
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
     <string name="logo">logo</string>
+    <string name="okk">OK</string>
+    <string name="notif">Thông báo!!!</string>
     <string name="next">Tiếp tục</string>
+    <string name="need_internet">Cần kết nối internet</string>
     <string name="login_with_pass">Đăng nhập bằng Mật khẩu</string>
     <string name="email_login_input">Email/Tên đăng nhập</string>
 
@@ -28,7 +31,14 @@
     <string name="login_with_sms">Đăng nhập bằng SMS</string>
     <string name="login">Đăng nhập</string>
     <string name="email">Email</string>
-
+    <string name="pass_invalid">Mật khẩu cần nhiều hơn 6 kí tự</string>
+    <string name="email_accdetail">Email:</string>
+    <string name="phoneAccDetail">Số điện thoại:</string>
+    <string name="accDetail">Thông tin tài khoản</string>
+    <string name="space" />
+    <string name="register">Đăng kí</string>
+    <string name="register_acc">Đăng kí tài khoản</string>
+    <string name="name_user">Tên khách hàng</string>
     <!-- page content-->
     <string name="home">Trang chủ</string>
     <string name="order">Đơn hàng</string>
@@ -43,20 +53,14 @@
     <string name="vnd_format">%s đ</string>
     <string name="add_cart_done">Thêm %s vào giỏ hàng thành công</string>
     <string name="quantity">Số lượng (%d)</string>
+    <string name="order_id">Mã đơn hàng: %d</string>
+    <string name="order_sum">Tổng tiền: %s đ</string>
+    <string name="order_time">Thời gian đặt: %s</string>
     <string name="order_detail">Chi tiết đơn hàng: %d</string>
     <string name="search_by_text">Tìm kiếm từ "%s"</string>
 
-
     <string name="order2">Đặt hàng</string>
-
-    <!-- result -->
-    <string name="pass_invalid">Mật khẩu cần nhiều hơn 6 kí tự</string>
-    <string name="success">Thành công</string>
-    <string name="fail">Tài khoản hoặc mật khẩu không đúng</string>
-    <string name="no_favorite">Danh sách yêu thích của bạn đang rỗng</string>
-    <string name="cart_no">Giỏ hàng đang trống</string>
-    <string name="no_order">Không có đơn hàng</string>
-    <string name="no_product_search">Không có sản phẩm phù hợp</string>
+    <!-- type product -->
     <string name="header_title">Danh mục sản phẩm</string>
     <string name="meat"><![CDATA[Thịt & thủy hải sản]]></string>
     <string name="vegetable">Rau</string>
@@ -68,12 +72,30 @@
     <string name="meat3">Thủy hải sản</string>
     <string name="fruit">Trái cây</string>
     <string name="fruit1">Trái cây nhập khẩu</string>
-    <string name="email_accdetail">Email:</string>
-    <string name="phoneAccDetail">Số điện thoại:</string>
-    <string name="accDetail">Thông tin tài khoản</string>
-    <string name="space" />
-    <string name="register">Đăng kí</string>
-    <string name="register_acc">Đăng kí tài khoản</string>
-    <string name="name_user">Tên khách hàng</string>
+    <!-- type order -->
+    <string name="ORDER_DONE">Giao thành công</string>
+    <string name="ORDER_DELIVERY">Đang giao</string>
+    <string name="ORDER_ORDER">Chờ duyệt</string>
+
+    <!-- result -->
+    <string name="success">Thành công</string>
+    <string name="fail">Tài khoản hoặc mật khẩu không đúng</string>
+    <string name="no_favorite">Danh sách yêu thích của bạn đang rỗng</string>
+    <string name="cart_no">Giỏ hàng đang trống</string>
+    <string name="no_order">Không có đơn hàng</string>
+    <string name="no_product_search">Không có sản phẩm phù hợp</string>
+
+    <string name="hanoi">Thành phố Hà Nội</string>
+    <string name="city">Thành phố</string>
+    <string name="District">Quận/huyện</string>
+    <string name="Ward">Phường/xã</string>
+    <string name="street">Số nhà/đường phố</string>
+
+    <string name="save">Lưu</string>
+    <string name="note">Ghi chú</string>
+    <string name="date_order">Ngày nhận</string>
+    <string name="re_shop">Nhận tại cửa hàng</string>
+    <string name="re_home">Nhận tại nhà</string>
+    <string name="address_shop">Số 3 đường Cầu Giấy</string>
 
 </resources>

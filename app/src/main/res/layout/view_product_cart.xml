@@ -77,7 +77,7 @@
         </LinearLayout>
 
         <ImageButton
-            android:id="@+id/imgBtnFavoriteCard_product_item_cart"
+            android:id="@+id/imgBtnDeleteCart"
             android:layout_width="@dimen/_24dp"
             android:layout_height="@dimen/_24dp"
             android:layout_weight="1"

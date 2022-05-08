@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav"
-    app:startDestination="@id/loginFragment">
+    app:startDestination="@id/firstFragment">
 
     <fragment
         android:id="@+id/loginOrRegisterFragment"
@@ -66,16 +66,25 @@
             android:defaultValue="2" />
         <action
             android:id="@+id/action_mainFragment2_to_loginFragment"
-            app:destination="@id/loginFragment" />
+            app:destination="@id/loginFragment"
+            app:popUpTo="@id/mainFragment2"
+            app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_mainFragment2_to_accountInformationFragment"
             app:destination="@id/accountInformationFragment" />
         <action
             android:id="@+id/action_mainFragment2_to_orderDetailFragment2"
-            app:destination="@id/orderDetailFragment2" />
+            app:destination="@id/orderDetailFragment2"
+            app:popUpTo="@id/mainFragment2" />
         <action
             android:id="@+id/action_mainFragment2_to_searchFragment"
             app:destination="@id/searchFragment" />
+        <action
+            android:id="@+id/action_mainFragment2_to_addressFragment"
+            app:destination="@id/addressFragment" />
+        <action
+            android:id="@+id/action_mainFragment2_to_bookingFragment"
+            app:destination="@id/bookingFragment" />
     </fragment>
     <fragment
         android:id="@+id/productDetailFragment"
@@ -94,6 +103,10 @@
             android:name="type"
             app:argType="integer"
             android:defaultValue="0" />
+        <action
+            android:id="@+id/action_productDetailFragment_to_loginFragment"
+            app:destination="@id/loginFragment"
+            app:popUpTo="@id/productDetailFragment" />
     </fragment>
     <fragment
         android:id="@+id/cartFragment"
@@ -106,16 +119,17 @@
         <argument
             android:name="type"
             app:argType="integer"
+
             android:defaultValue="0" />
+        <action
+            android:id="@+id/action_cartFragment_to_bookingFragment"
+            app:destination="@id/bookingFragment" />
     </fragment>
     <fragment
         android:id="@+id/firstFragment"
         android:name="com.example.myapplication.datn.ui.main.FirstFragment"
         android:label="fragment_first"
         tools:layout="@layout/fragment_first" >
-        <action
-            android:id="@+id/action_firstFragment_to_loginFragment"
-            app:destination="@id/loginFragment" />
         <action
             android:id="@+id/action_firstFragment_to_mainFragment2"
             app:destination="@id/mainFragment2" />
@@ -172,5 +186,23 @@
             android:name="phone"
             app:argType="integer"
             android:defaultValue="0" />
+    </fragment>
+    <fragment
+        android:id="@+id/addressFragment"
+        android:name="com.example.myapplication.datn.ui.address.AddressFragment"
+        android:label="fragment_address"
+        tools:layout="@layout/fragment_address" />
+    <fragment
+        android:id="@+id/bookingFragment"
+        android:name="com.example.myapplication.datn.ui.booking.BookingFragment"
+        android:label="fragment_booking"
+        tools:layout="@layout/fragment_booking" >
+        <action
+            android:id="@+id/action_bookingFragment_to_addressFragment"
+            app:destination="@id/addressFragment" />
+        <action
+            android:id="@+id/action_bookingFragment_to_orderDetailFragment2"
+            app:destination="@id/orderDetailFragment2"
+            app:popUpTo="@id/mainFragment2" />
     </fragment>
 </navigation>
