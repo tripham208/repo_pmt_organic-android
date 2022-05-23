@@ -26,6 +26,12 @@ interface AppAPI {
         @Path("password") password: String
     ): List<User>
 
+    @GET("user/phone/{username}/{password}")
+    suspend fun getUserByPhone(
+        @Path("username") phone: Int,
+    ): List<User>
+
+
     @GET("bill-detail/id-bill/{id}")
     suspend fun getDetails(@Path("id") id: Int): List<DetailOrder>
 
@@ -54,8 +60,10 @@ interface AppAPI {
     suspend fun updateUser(@Path("id") id: Int, @Body user: User)
 
 
+
+
     companion object {
-        private const val CODE = "ddf0-2405-4803-fc5e-9610-8cd1-499b-64ce-c38d.ap.ngrok.io"
+        private const val CODE = "cfba-113-190-252-57.ap.ngrok.io"
         const val BASE_URL = "https://$CODE/api/"
         const val IMG_URL = "https://$CODE"
     }

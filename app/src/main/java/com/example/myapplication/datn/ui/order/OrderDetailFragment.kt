@@ -47,7 +47,7 @@ class OrderDetailFragment : BaseFragment<FragmentOrderDetailBinding>() {
         binding.apply {
             rcvOrderDetail.adapter = adapter
             if (args.order!=null){
-                tvSumOrder.text= resources.getString(R.string.vnd_format, args.order!!.tongtien.toStringFormat())
+                tvSumOrder.text= resources.getString(R.string.vnd_format, args.order!!.sum.toStringFormat())
                 tvDeTailOrder.text= resources.getString(R.string.order_detail, args.order!!.id)
             }
         }
@@ -83,7 +83,7 @@ class OrderDetailFragment : BaseFragment<FragmentOrderDetailBinding>() {
             adapter?.submitList(list)
             var quan = 0
             list.forEach {
-                quan += it.soluong
+                quan += it.quantity
             }
             binding.tvQuantityOrderDetail.text =
                 resources.getString(R.string.quantity, quan)

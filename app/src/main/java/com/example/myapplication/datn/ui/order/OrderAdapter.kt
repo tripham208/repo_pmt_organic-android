@@ -82,8 +82,8 @@ class OrderAdapter(val context: Context) :
         override fun bind(data: Order) {
             id.text = context.resources.getString(R.string.order_id, data.id)
             sum.text =
-                context.resources.getString(R.string.order_sum, data.tongtien.toStringFormat())
-            time.text = context.resources.getString(R.string.order_time, data.thoigian)
+                context.resources.getString(R.string.order_sum, data.sum.toStringFormat())
+            time.text = context.resources.getString(R.string.order_time, data.time)
         }
     }
 

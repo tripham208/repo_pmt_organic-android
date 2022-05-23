@@ -3,35 +3,26 @@ package com.example.myapplication.datn.ui.booking
 import android.app.DatePickerDialog
 import android.icu.util.Calendar
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
-import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.myapplication.datn.R
 import com.example.myapplication.datn.databinding.FragmentBookingBinding
-import com.example.myapplication.datn.databinding.FragmentCartBinding
-import com.example.myapplication.datn.model.entity.Product
-import com.example.myapplication.datn.ui.MainFragmentDirections
 import com.example.myapplication.datn.ui.adapter.OrderDetailAdapter
 import com.example.myapplication.datn.ui.base.BaseFragment
 import com.example.myapplication.datn.ui.cart.CartFragmentArgs
-import com.example.myapplication.datn.ui.cart.CartFragmentDirections
 import com.example.myapplication.datn.ui.cart.CartViewModel
-import com.example.myapplication.datn.ui.cart.ProductCartAdapter
+import com.example.myapplication.datn.ui.dialog.InternetDialogFragment
 import com.example.myapplication.datn.ui.home.HomeViewModel
 import com.example.myapplication.datn.ui.login.UserViewModel
+import com.example.myapplication.datn.utils.Checker
 import com.example.myapplication.datn.utils.Logger
 import com.example.myapplication.datn.utils.toStringFormat
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 @AndroidEntryPoint
 class BookingFragment : BaseFragment<FragmentBookingBinding>() {
@@ -93,20 +84,27 @@ class BookingFragment : BaseFragment<FragmentBookingBinding>() {
                 findNavController().navigate(R.id.action_bookingFragment_to_addressFragment)
             }
             btnOrderBooking.setOnClickListener {
-                var note = ""
-                if (txtDaBooking.text.isNotBlank()) {
-                    note += "Nhận ngày ${txtDaBooking.text}. "
-                }
-                if (radioButtonShop.isChecked) {
-                    note += "Nhận tại cửa hàng"
-                }
-                note += txtNoteBooking.text
+                if (context?.let { it1 -> Checker.checkForInternet(it1) } == true) {
+                    var note = ""
+                    if (txtDaBooking.text.isNotBlank()) {
+                        note += "Nhận ngày ${txtDaBooking.text}. "
+                    }
+                    if (radioButtonShop.isChecked) {
+                        note += "Nhận tại cửa hàng"
+                    }
+                    note += txtNoteBooking.text
 
-                val booking = viewModel.cart.value?.copy(ghichu = note, loaidon = 3)
-                if (booking != null) {
-                    viewModel.booking(booking)
-                    progressBar.visibility = View.VISIBLE
+                    val booking = viewModel.cart.value?.copy(note = note, typeOrder = 3)
+                    if (booking != null) {
+                        viewModel.booking(booking)
+                        progressBar.visibility = View.VISIBLE
+                    }
+                } else {
+                    InternetDialogFragment().show(
+                        childFragmentManager, InternetDialogFragment.TAG
+                    )
                 }
+
             }
         }
 
@@ -122,8 +120,8 @@ class BookingFragment : BaseFragment<FragmentBookingBinding>() {
                 var sum = 0
                 var quan = 0
                 list.forEach {
-                    sum += it.soluong * it.dongia
-                    quan += it.soluong
+                    sum += it.quantity * it.unitPrice
+                    quan += it.quantity
                 }
 
                 binding.tvQuantityBooking.text =
@@ -134,16 +132,17 @@ class BookingFragment : BaseFragment<FragmentBookingBinding>() {
         viewModel.cart.observe(viewLifecycleOwner) {
             if (it != null)
                 binding.tvSumBooking.text =
-                    resources.getString(R.string.vnd_format, it.tongtien.toStringFormat())
+                    resources.getString(R.string.vnd_format, it.sum.toStringFormat())
 
         }
         userViewModel.user.observe(viewLifecycleOwner) {
             if (it?.address != null)
                 binding.tvAddressBooking.text = it.address
         }
-        viewModel.orderBooking.observe(viewLifecycleOwner){
-            if (it != null){
-                val action =  BookingFragmentDirections.actionBookingFragmentToOrderDetailFragment2(it)
+        viewModel.orderBooking.observe(viewLifecycleOwner) {
+            if (it != null) {
+                val action =
+                    BookingFragmentDirections.actionBookingFragmentToOrderDetailFragment2(it)
                 findNavController().navigate(action)
             }
         }

@@ -12,22 +12,22 @@ data class Product(
     @PrimaryKey
     @Json(name = "id")
     @ColumnInfo(name = "id") val id: Int,
-    @Json(name = "ten")
-    @ColumnInfo(name = "name") val ten: String?,
-    @Json(name = "idloai")
-    @ColumnInfo(name = "type") val idloai: Int,
-    @Json(name = "anh")
-    @ColumnInfo(name = "image") val anh: String?,
-    @Json(name = "mota")
-    @ColumnInfo(name = "description") val mota: String?,
-    @Json(name = "donvi")
-    @ColumnInfo(name = "unit") val donvi: String?,
-    @Json(name = "soluong")
-    @ColumnInfo(name = "quantity") val soluong: Int,
-    @Json(name = "dongia")
-    @ColumnInfo(name = "price") val dongia: Int,
-    @Json(name = "idthuonghieu")
-    @ColumnInfo(name = "trademark") val idthuonghieu: Int,
+    @Json(name = "name")
+    @ColumnInfo(name = "name") val name: String?,
+    @Json(name = "idTypeProduct")
+    @ColumnInfo(name = "type") val idTypeProduct: Int,
+    @Json(name = "image")
+    @ColumnInfo(name = "image") val image: String?,
+    @Json(name = "description")
+    @ColumnInfo(name = "description") val description: String?,
+    @Json(name = "unit")
+    @ColumnInfo(name = "unit") val unit: String?,
+    @Json(name = "quantity")
+    @ColumnInfo(name = "quantity") val quantity: Int,
+    @Json(name = "unitPrice")
+    @ColumnInfo(name = "price") val price: Int,
+    @Json(name = "idBranch")
+    @ColumnInfo(name = "trademark") val idBranch: Int,
     @ColumnInfo(name = "favorite") val favorite: Boolean = false,
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
@@ -46,14 +46,14 @@ data class Product(
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeInt(id)
-        parcel.writeString(ten)
-        parcel.writeInt(idloai)
-        parcel.writeString(anh)
-        parcel.writeString(mota)
-        parcel.writeString(donvi)
-        parcel.writeInt(soluong)
-        parcel.writeInt(dongia)
-        parcel.writeInt(idthuonghieu)
+        parcel.writeString(name)
+        parcel.writeInt(idTypeProduct)
+        parcel.writeString(image)
+        parcel.writeString(description)
+        parcel.writeString(unit)
+        parcel.writeInt(quantity)
+        parcel.writeInt(price)
+        parcel.writeInt(idBranch)
         parcel.writeByte(if (favorite) 1 else 0)
     }
 

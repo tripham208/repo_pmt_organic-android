@@ -30,7 +30,9 @@
             app:destination="@id/loginOrRegisterFragment" />
         <action
             android:id="@+id/action_loginFragment_to_mainFragment2"
-            app:destination="@id/mainFragment2" />
+            app:destination="@id/mainFragment2"
+            app:popUpTo="@id/nav"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/passwordFragment"
@@ -44,7 +46,9 @@
         tools:layout="@layout/fragment_verification" >
         <action
             android:id="@+id/action_verificationFragment_to_mainFragment2"
-            app:destination="@id/mainFragment2" />
+            app:destination="@id/mainFragment2"
+            app:popUpTo="@id/nav"
+            app:popUpToInclusive="true" />
         <argument
             android:name="phone"
             android:defaultValue="0" />
@@ -181,7 +185,9 @@
         tools:layout="@layout/fragment_register" >
         <action
             android:id="@+id/action_registerFragment_to_mainFragment2"
-            app:destination="@id/mainFragment2" />
+            app:destination="@id/mainFragment2"
+            app:popUpTo="@id/nav"
+            app:popUpToInclusive="true" />
         <argument
             android:name="phone"
             app:argType="integer"
@@ -203,6 +209,8 @@
         <action
             android:id="@+id/action_bookingFragment_to_orderDetailFragment2"
             app:destination="@id/orderDetailFragment2"
-            app:popUpTo="@id/mainFragment2" />
+            app:launchSingleTop="false"
+            app:popUpTo="@id/firstFragment"
+            app:popUpToInclusive="true" />
     </fragment>
 </navigation>

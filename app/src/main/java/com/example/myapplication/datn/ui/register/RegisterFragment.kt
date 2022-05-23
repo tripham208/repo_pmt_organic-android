@@ -35,13 +35,13 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>() {
         binding.btnRegister.setOnClickListener {
             val user = User(
                 id = null,
-                name = "test",
-                password = "test",
-                username = "username",
-                loaitaikhoan = 1,
-                address = " ",
-                email = " ",
-                phone = 1,
+                username = binding.edAccountRegister.text.toString(),
+                password = binding.edPassRegister.text.toString(),
+                phone = args.phone,
+                name = binding.edNameRegister.text.toString(),
+                typeAccount = 1,
+                email = binding.edEmailRegister.text.toString(),
+                address = null
                 )
             viewModel.register(user)
         }

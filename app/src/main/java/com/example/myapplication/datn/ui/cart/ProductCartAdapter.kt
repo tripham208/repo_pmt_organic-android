@@ -52,14 +52,14 @@ class ProductCartAdapter(val context: Context, val viewModel: HomeViewModel) :
     }
 
     private fun onItemSelected(position: Int) {
-        itemSelected?.invoke(currentList[position].idsanpham)
+        itemSelected?.invoke(currentList[position].idProduct)
     }
     private fun onItemDeleteSelected(position: Int) {
         deleteSelected?.invoke(currentList[position])
     }
 
     private fun onChange(position: Int, number: Int) {
-        val detail = currentList[position].copy(soluong = number)
+        val detail = currentList[position].copy(quantity = number)
         detailChange?.invoke(detail)
     }
 
@@ -110,15 +110,15 @@ class ProductCartAdapter(val context: Context, val viewModel: HomeViewModel) :
         override fun bind(data: DetailOrder) {
             GlobalScope.launch(Dispatchers.Main) {
                 var res: Product? = null
-                res = homeViewModel.getProduct(data.idsanpham)
+                res = homeViewModel.getProduct(data.idProduct)
 
-                name.text = res?.ten
-                unit.text = res?.donvi
+                name.text = res?.name
+                unit.text = res?.unit
                 number.text =
-                    context.resources.getString(R.string.vnd_format, data.dongia.toStringFormat())
-                numberPicker.setNumber(data.soluong)
+                    context.resources.getString(R.string.vnd_format, data.unitPrice.toStringFormat())
+                numberPicker.setNumber(data.quantity)
                 Glide.with (context)
-                    .load ( "${AppAPI.IMG_URL}${res?.anh}")
+                    .load ( "${AppAPI.IMG_URL}${res?.image}")
                     .fitCenter()
                     .into (img);
                 val result = withContext(Dispatchers.Default) {

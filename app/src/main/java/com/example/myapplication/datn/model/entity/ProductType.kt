@@ -7,10 +7,10 @@ import com.squareup.moshi.Json
 data class ProductType(
     @Json(name = "id")
     val id: Int,
-    @Json(name = "ten")
+    @Json(name = "name")
     val name: String,
-    @Json(name = "cha")
-    val cha: Int?
+    @Json(name = "father")
+    val father: Int?
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readInt(),
@@ -22,7 +22,7 @@ data class ProductType(
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeInt(id)
         parcel.writeString(name)
-        parcel.writeValue(cha)
+        parcel.writeValue(father)
     }
 
     override fun describeContents(): Int {

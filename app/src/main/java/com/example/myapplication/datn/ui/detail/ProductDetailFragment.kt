@@ -8,14 +8,12 @@ import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import androidx.navigation.get
 import com.bumptech.glide.Glide
 import com.example.myapplication.datn.R
 import com.example.myapplication.datn.database.AppAPI
 import com.example.myapplication.datn.databinding.FragmentProductDetailBinding
 import com.example.myapplication.datn.model.entity.DetailOrder
 import com.example.myapplication.datn.model.entity.Order
-import com.example.myapplication.datn.ui.MainFragmentDirections
 import com.example.myapplication.datn.ui.base.BaseFragment
 import com.example.myapplication.datn.ui.cart.CartViewModel
 import com.example.myapplication.datn.ui.home.HomeViewModel
@@ -66,14 +64,14 @@ class ProductDetailFragment : BaseFragment<FragmentProductDetailBinding>() {
                     if (cartViewModel.cart.value != null) {
                         val detail = cartViewModel.cart.value!!.id.let { it1 ->
                             args.product?.id?.let { it2 ->
-                                args.product?.dongia?.let { it3 ->
+                                args.product?.price?.let { it3 ->
                                     DetailOrder(
                                         id = null,
-                                        idhoadon = it1,
-                                        idsanpham = it2,
-                                        soluong = binding.numberPicker2.getNumber(),
-                                        dongia = it3,
-                                        giamgia = null
+                                        idOrder = it1,
+                                        idProduct = it2,
+                                        quantity = binding.numberPicker2.getNumber(),
+                                        unitPrice = it3,
+                                        discount = null
                                     )
                                 }
                             }
@@ -84,7 +82,7 @@ class ProductDetailFragment : BaseFragment<FragmentProductDetailBinding>() {
                     }
                     Toast.makeText(
                         context,
-                        resources.getString(R.string.add_cart_done, args.product?.ten),
+                        resources.getString(R.string.add_cart_done, args.product?.name),
                         Toast.LENGTH_LONG
                     ).show()
                 }
@@ -96,11 +94,11 @@ class ProductDetailFragment : BaseFragment<FragmentProductDetailBinding>() {
         super.initView()
         args.product.let {
             binding.apply {
-                tvNameProductDetail.text = args.product?.ten
+                tvNameProductDetail.text = args.product?.name
                 tvValueProductDetail.text =
-                    resources.getString(R.string.vnd_format, args.product?.dongia?.toStringFormat())
+                    resources.getString(R.string.vnd_format, args.product?.price?.toStringFormat())
                 tvDes.text =
-                    Html.fromHtml(args.product?.mota, Html.FROM_HTML_MODE_COMPACT)
+                    Html.fromHtml(args.product?.description, Html.FROM_HTML_MODE_COMPACT)
 
                 if (it?.favorite == true) {
                     binding.imgBtnAddFavoriteDetailProduct.setImageResource(R.drawable.ic_baseline_favorite_24)
@@ -108,7 +106,7 @@ class ProductDetailFragment : BaseFragment<FragmentProductDetailBinding>() {
                     binding.imgBtnAddFavoriteDetailProduct.setImageResource(R.drawable.ic_baseline_favorite_border_24)
                 }
                 Glide.with(this@ProductDetailFragment)
-                    .load("${AppAPI.IMG_URL}${it?.anh}")
+                    .load("${AppAPI.IMG_URL}${it?.image}")
                     .fitCenter().error(R.drawable.ic_baseline_error_24)
                     .placeholder(R.drawable.ic_baseline_downloading_24)
                     .into(imgDetailProduct);

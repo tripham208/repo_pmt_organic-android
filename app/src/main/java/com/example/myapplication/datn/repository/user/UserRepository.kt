@@ -22,7 +22,25 @@ class UserRepository @Inject constructor(
 ) : IUserRepository {
     override val user: LiveData<User> = userDao.getUserToLiveData()
     override suspend fun checkLogin(username: String, pass: String): Boolean {
+        //User(null, username, password = pass, "", 0, 0, null, null)
         val x = api.getUser(username, pass)
+        if (x.size == 1) {
+            userDao.insert(x[0])
+            x[0].id?.let { api.getCart(it) }?.let { it ->
+                orderDao.insert(it)
+                /*
+                api.getDetails(it.id).forEach {
+                    detailOrderDao.insert(it)
+                }*/
+            }
+
+            return true
+        }
+        return false
+    }
+
+    override suspend fun checkPhone(int: Int): Boolean {
+        val x = api.getUserByPhone(int)
         if (x.size == 1) {
             userDao.insert(x[0])
             x[0].id?.let { api.getCart(it) }?.let { it ->
@@ -55,7 +73,7 @@ class UserRepository @Inject constructor(
 
 
     override suspend fun updateUser(user: User) {
-        user.id?.let { api.updateUser(it,user) }
+        user.id?.let { api.updateUser(it, user) }
         userDao.updates(user)
     }
 

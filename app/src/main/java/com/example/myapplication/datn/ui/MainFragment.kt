@@ -1,5 +1,6 @@
 package com.example.myapplication.datn.ui
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -7,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.Navigation.findNavController
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupWithNavController
@@ -33,8 +35,31 @@ class MainFragment : BaseFragment<FragmentMainBinding>() {
         return FragmentMainBinding.inflate(inflater, container, false)
     }
 
-    override fun initAction() {
+    override fun initView() {
+        super.initView()
 
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        //refreshCurrentFragment()
+    }
+
+    override fun onResume() {
+        super.onResume()
+       // refreshCurrentFragment()
+    }
+
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+    }
+    private fun refreshCurrentFragment(){
+        val id = findNavController().currentDestination?.id
+        findNavController().popBackStack(id!!,true)
+        findNavController().navigate(id)
+    }
+    override fun initAction() {
         binding.viewPager.adapter = FragmentAdapter(requireActivity())
 
 
@@ -54,11 +79,12 @@ class MainFragment : BaseFragment<FragmentMainBinding>() {
                     true
                 }
                 R.id.page_2 -> {
-                    binding.viewPager.setCurrentItem(1, true)
 
+                    binding.viewPager.setCurrentItem(1, true)
                     true
                 }
                 R.id.page_5 -> {
+
                     binding.viewPager.setCurrentItem(2, true)
                     true
                 }

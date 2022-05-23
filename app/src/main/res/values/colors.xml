@@ -15,5 +15,8 @@
     <color name="basil_50">#FFFBE6</color>
 
     <color name="oga_300">#51B34C</color>
+    <color name="t1">#B9F6CA</color>
+    <color name="pending">#FFD180</color>
+    <color name="danger">#F44336</color>
 
 </resources>

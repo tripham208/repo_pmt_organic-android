@@ -5,12 +5,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import com.example.myapplication.datn.databinding.FragmentHistoryOrderBinding
 import com.example.myapplication.datn.model.entity.Order
+import com.example.myapplication.datn.ui.MainFragmentDirections
 import com.example.myapplication.datn.ui.base.BaseFragment
 import com.example.myapplication.datn.ui.cart.CartViewModel
 import com.example.myapplication.datn.utils.Checker
-import com.example.myapplication.datn.utils.Logger
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -40,7 +41,8 @@ class NowOrderFragment : BaseFragment<FragmentHistoryOrderBinding>() {
     override fun initAction() {
         super.initAction()
         adapter?.itemSelected = {
-            Logger.d(it.toString())
+            val action = MainFragmentDirections.actionMainFragment2ToOrderDetailFragment2(it)
+            findNavController().navigate(action)
         }
 
     }
@@ -50,7 +52,7 @@ class NowOrderFragment : BaseFragment<FragmentHistoryOrderBinding>() {
         viewModel.historyResult.observe(viewLifecycleOwner) { list ->
             val listH = mutableListOf<Order>()
             list.forEach {
-                if (it.loaidon != 2 && it.loaidon != 1)
+                if (it.typeOrder != 2 && it.typeOrder != 1)
                     listH.add(it)
             }
             if (listH.isEmpty())

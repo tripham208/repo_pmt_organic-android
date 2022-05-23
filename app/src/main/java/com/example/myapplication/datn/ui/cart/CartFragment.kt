@@ -12,8 +12,10 @@ import com.example.myapplication.datn.databinding.FragmentCartBinding
 import com.example.myapplication.datn.model.entity.Product
 import com.example.myapplication.datn.ui.MainFragmentDirections
 import com.example.myapplication.datn.ui.base.BaseFragment
+import com.example.myapplication.datn.ui.dialog.InternetDialogFragment
 import com.example.myapplication.datn.ui.home.HomeViewModel
 import com.example.myapplication.datn.ui.login.UserViewModel
+import com.example.myapplication.datn.utils.Checker
 import com.example.myapplication.datn.utils.Logger
 import com.example.myapplication.datn.utils.toStringFormat
 import dagger.hilt.android.AndroidEntryPoint
@@ -82,10 +84,24 @@ class CartFragment : BaseFragment<FragmentCartBinding>() {
             }
         }
         adapter?.detailChange = {
-            viewModel.updateDetail(it)
+            if (context?.let { Checker.checkForInternet(it) } == true) {
+                viewModel.updateDetail(it)
+            } else {
+                InternetDialogFragment().show(
+                    childFragmentManager, InternetDialogFragment.TAG
+                )
+            }
+
         }
         adapter?.deleteSelected = {
-            viewModel.deleteDetail(it)
+
+            if (context?.let { Checker.checkForInternet(it) } == true) {
+                viewModel.deleteDetail(it)
+            } else {
+                InternetDialogFragment().show(
+                    childFragmentManager, InternetDialogFragment.TAG
+                )
+            }
         }
 
     }
@@ -100,10 +116,10 @@ class CartFragment : BaseFragment<FragmentCartBinding>() {
                 var sum = 0
                 var quan = 0
                 list.forEach {
-                    sum += it.soluong * it.dongia
-                    quan += it.soluong
+                    sum += it.quantity * it.unitPrice
+                    quan += it.quantity
                 }
-                val cart = viewModel.cart.value?.copy(tongtien = sum)
+                val cart = viewModel.cart.value?.copy(sum = sum)
                 if (cart != null) {
                     viewModel.updateCart(cart)
                 }
@@ -113,7 +129,7 @@ class CartFragment : BaseFragment<FragmentCartBinding>() {
                 binding.scrollCart.visibility = View.VISIBLE
                 binding.tvNoCart.visibility = View.GONE
             } else {
-                val cart = viewModel.cart.value?.copy(tongtien = 0)
+                val cart = viewModel.cart.value?.copy(sum = 0)
                 if (cart != null) {
                     viewModel.updateCart(cart)
                 }
@@ -125,7 +141,7 @@ class CartFragment : BaseFragment<FragmentCartBinding>() {
         viewModel.cart.observe(viewLifecycleOwner) {
             if (it != null)
                 binding.tvSumCart.text =
-                    resources.getString(R.string.vnd_format, it.tongtien.toStringFormat())
+                    resources.getString(R.string.vnd_format, it.sum.toStringFormat())
             else
                 binding.tvSumCart.text =
                     resources.getString(R.string.vnd_format, 0.toStringFormat())

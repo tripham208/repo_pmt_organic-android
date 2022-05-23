@@ -11,7 +11,6 @@ import com.example.myapplication.datn.model.entity.Order
 import com.example.myapplication.datn.ui.MainFragmentDirections
 import com.example.myapplication.datn.ui.base.BaseFragment
 import com.example.myapplication.datn.ui.cart.CartViewModel
-import com.example.myapplication.datn.utils.Logger
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -39,7 +38,6 @@ class HistoryOrderFragment : BaseFragment<FragmentHistoryOrderBinding>() {
     override fun initAction() {
         super.initAction()
         adapter?.itemSelected = {
-            Logger.d(it.toString())
             val action = MainFragmentDirections.actionMainFragment2ToOrderDetailFragment2(it)
             findNavController().navigate(action)
         }
@@ -51,7 +49,7 @@ class HistoryOrderFragment : BaseFragment<FragmentHistoryOrderBinding>() {
         viewModel.historyResult.observe(viewLifecycleOwner) { list ->
             val listH = mutableListOf<Order>()
             list.forEach {
-                if (it.loaidon == 2) {
+                if (it.typeOrder == 2) {
                     listH.add(it)
                 }
             }

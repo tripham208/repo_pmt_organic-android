@@ -79,10 +79,10 @@ class ProductAdapter (val context: Context): BaseListAdapter<Product>(ContactDif
         }
 
         override fun bind(data: Product) {
-            name.text = data.ten
-            number.text = context.resources.getString(R.string.vnd_format, data.dongia.toStringFormat())
+            name.text = data.name
+            number.text = context.resources.getString(R.string.vnd_format, data.price.toStringFormat())
             Glide.with (context)
-                .load ( "${AppAPI.IMG_URL}${data.anh}")
+                .load ( "${AppAPI.IMG_URL}${data.image}")
                 .fitCenter()
                 .into (img);
         }

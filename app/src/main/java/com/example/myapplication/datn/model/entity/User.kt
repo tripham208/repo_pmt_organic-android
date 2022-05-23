@@ -12,19 +12,19 @@ data class User(
     @PrimaryKey(autoGenerate = true)
     @Json(name = "id")
     @ColumnInfo(name = "id") val id: Int?,
-    @Json(name = "taikhoan")
+    @Json(name = "username")
     @ColumnInfo(name = "username") var username: String,
     @Json(name = "password")
     @ColumnInfo(name = "password") var password: String,
-    @Json(name = "ten")
+    @Json(name = "fullName")
     @ColumnInfo(name = "name") var name: String,
-    @Json(name = "sdt")
+    @Json(name = "phone")
     @ColumnInfo(name = "phone") var phone: Int,
-    @Json(name = "loaitaikhoan")
-    @ColumnInfo(name = "type_account") var loaitaikhoan: Int,
+    @Json(name = "typeAccount")
+    @ColumnInfo(name = "type_account") var typeAccount: Int,
     @Json(name = "email")
     @ColumnInfo(name = "email") var email: String?,
-    @Json(name = "diachi")
+    @Json(name = "address")
     @ColumnInfo(name = "address") var address: String?,
 ): Parcelable {
     constructor(parcel: Parcel) : this(
@@ -47,7 +47,7 @@ data class User(
         parcel.writeString(password)
         parcel.writeString(name)
         parcel.writeInt(phone)
-        parcel.writeInt(loaitaikhoan)
+        parcel.writeInt(typeAccount)
         parcel.writeString(email)
         parcel.writeString(address)
     }

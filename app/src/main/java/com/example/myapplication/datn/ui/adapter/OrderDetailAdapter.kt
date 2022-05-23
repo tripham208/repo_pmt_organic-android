@@ -9,7 +9,6 @@ import com.bumptech.glide.Glide
 import com.example.myapplication.datn.R
 import com.example.myapplication.datn.database.AppAPI
 import com.example.myapplication.datn.databinding.CardOrderDetailListBinding
-import com.example.myapplication.datn.databinding.ViewProductCartBinding
 import com.example.myapplication.datn.model.entity.DetailOrder
 import com.example.myapplication.datn.model.entity.Product
 import com.example.myapplication.datn.ui.base.BaseListAdapter
@@ -51,7 +50,7 @@ class OrderDetailAdapter (val context: Context, val viewModel: HomeViewModel) :
     }
 
     private fun onItemSelected(position: Int) {
-        itemSelected?.invoke(currentList[position].idsanpham)
+        itemSelected?.invoke(currentList[position].idProduct)
     }
 
 
@@ -95,15 +94,15 @@ class OrderDetailAdapter (val context: Context, val viewModel: HomeViewModel) :
         override fun bind(data: DetailOrder) {
             GlobalScope.launch(Dispatchers.Main) {
                 var res: Product? = null
-                res = homeViewModel.getProduct(data.idsanpham)
-                name.text = res?.ten
-                unit.text = res?.donvi
+                res = homeViewModel.getProduct(data.idProduct)
+                name.text = res?.name
+                unit.text = res?.unit
                 number.text =
-                    context.resources.getString(R.string.vnd_format, data.dongia.toStringFormat())
+                    context.resources.getString(R.string.vnd_format, data.unitPrice.toStringFormat())
                 quantity.text=
-                    context.resources.getString(R.string.quantity, data.soluong)
+                    context.resources.getString(R.string.quantity, data.quantity)
                 Glide.with (context)
-                    .load ( "${AppAPI.IMG_URL}${res?.anh}")
+                    .load ( "${AppAPI.IMG_URL}${res?.image}")
                     .fitCenter()
                     .into (img);
 

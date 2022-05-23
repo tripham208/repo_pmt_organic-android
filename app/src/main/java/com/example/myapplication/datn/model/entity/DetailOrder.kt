@@ -11,17 +11,17 @@ import com.squareup.moshi.Json
 data class DetailOrder(
     @Json(name = "id")
     @ColumnInfo(name = "id") val id: Int?,
-    @Json(name = "idhoadon")
-    @ColumnInfo(name = "idOrder") val idhoadon: Int,
+    @Json(name = "idOrder")
+    @ColumnInfo(name = "idOrder") val idOrder: Int,
     @PrimaryKey
-    @Json(name = "idsanpham")
-    @ColumnInfo(name = "idProduct") val idsanpham: Int,
-    @Json(name = "soluong")
-    @ColumnInfo(name = "quantity") var soluong: Int,
-    @Json(name = "dongia")
-    @ColumnInfo(name = "unitPrice") val dongia: Int,
-    @Json(name = "giamgia")
-    @ColumnInfo(name = "discount") val giamgia: Int?,
+    @Json(name = "idProduct")
+    @ColumnInfo(name = "idProduct") val idProduct: Int,
+    @Json(name = "quantity")
+    @ColumnInfo(name = "quantity") var quantity: Int,
+    @Json(name = "unitPrice")
+    @ColumnInfo(name = "unitPrice") val unitPrice: Int,
+    @Json(name = "discount")
+    @ColumnInfo(name = "discount") val discount: Int?,
 ): Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readValue(Int::class.java.classLoader) as? Int,
@@ -35,12 +35,12 @@ data class DetailOrder(
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeValue(id)
-        parcel.writeInt(idhoadon)
-        parcel.writeInt(idsanpham)
-        parcel.writeInt(soluong)
-        parcel.writeInt(dongia)
-        if (giamgia != null) {
-            parcel.writeInt(giamgia)
+        parcel.writeInt(idOrder)
+        parcel.writeInt(idProduct)
+        parcel.writeInt(quantity)
+        parcel.writeInt(unitPrice)
+        if (discount != null) {
+            parcel.writeInt(discount)
         }
     }
 

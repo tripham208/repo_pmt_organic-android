@@ -80,12 +80,12 @@ class ProductFavoriteAdapter(val context: Context) : BaseListAdapter<Product>(Co
         }
 
         override fun bind(data: Product) {
-            name.text = data.ten
-            unit.text = data.donvi
+            name.text = data.name
+            unit.text = data.unit
             number.text =
-                context.resources.getString(R.string.vnd_format, data.dongia.toStringFormat())
+                context.resources.getString(R.string.vnd_format, data.price.toStringFormat())
             Glide.with (context)
-                .load ( "${AppAPI.IMG_URL}${data.anh}")
+                .load ( "${AppAPI.IMG_URL}${data.image}")
                 .fitCenter()
                 .into (img);
         }

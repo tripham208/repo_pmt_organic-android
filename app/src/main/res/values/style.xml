@@ -1,11 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <style name="button" parent="Widget.Material3.Button">
         <item name="backgroundTint">@color/basil_500</item>
         <item name="android:textSize">@dimen/text_button</item>
     </style>
+
     <style name="header_page">
         <item name="android:textSize">22sp</item>
         <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="card_list_shadow">
+        <item name="cardElevation">2dp</item>
+        <item name="cardUseCompatPadding">true</item>
     </style>
 </resources>

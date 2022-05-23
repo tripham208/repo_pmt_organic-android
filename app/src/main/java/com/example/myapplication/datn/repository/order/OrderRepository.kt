@@ -6,8 +6,6 @@ import com.example.myapplication.datn.model.dao.DetailOrderDao
 import com.example.myapplication.datn.model.dao.OrderDao
 import com.example.myapplication.datn.model.entity.DetailOrder
 import com.example.myapplication.datn.model.entity.Order
-import com.example.myapplication.datn.model.entity.ProductType
-import com.example.myapplication.datn.utils.Logger
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -40,9 +38,9 @@ class OrderRepository @Inject constructor(
     }
 
     override suspend fun insertDetail(item: DetailOrder) {
-        val detail = orderDetailOrder.getItem(item.idsanpham)
+        val detail = orderDetailOrder.getItem(item.idProduct)
         if (detail != null) {
-            detail.soluong += item.soluong
+            detail.quantity += item.quantity
             updateDetail(detail)
         } else {
             api.addDetail(item)

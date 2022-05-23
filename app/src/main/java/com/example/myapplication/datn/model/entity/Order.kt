@@ -12,20 +12,20 @@ data class Order(
     @PrimaryKey
     @Json(name = "id")
     @ColumnInfo(name = "id") val id: Int,
-    @Json(name = "idkhachhang")
-    @ColumnInfo(name = "idUser") val idkhachhang: Int,
-    @Json(name = "idnhanvien")
-    @ColumnInfo(name = "idStaff") val idnhanvien: Int,
-    @Json(name = "tongtien")
-    @ColumnInfo(name = "sum") val tongtien: Int,
-    @Json(name = "thoigian")
-    @ColumnInfo(name = "time", defaultValue = "CURRENT_TIMESTAMP") val thoigian: String?,
-    @Json(name = "thanhtoan")
-    @ColumnInfo(name = "pay") val thanhtoan: Int,
-    @Json(name = "loaidon")
-    @ColumnInfo(name = "typeOrder") val loaidon: Int,
-    @Json(name = "ghichu")
-    @ColumnInfo(name = "note") val ghichu: String?,
+    @Json(name = "idCustomer")
+    @ColumnInfo(name = "idUser") val idUser: Int,
+    @Json(name = "idEmployee")
+    @ColumnInfo(name = "idStaff") val idStaff: Int,
+    @Json(name = "total")
+    @ColumnInfo(name = "sum") val sum: Int,
+    @Json(name = "time")
+    @ColumnInfo(name = "time", defaultValue = "CURRENT_TIMESTAMP") val time: String?,
+    @Json(name = "payment")
+    @ColumnInfo(name = "pay") val payment: Int,
+    @Json(name = "typeOrder")
+    @ColumnInfo(name = "typeOrder") val typeOrder: Int,
+    @Json(name = "note")
+    @ColumnInfo(name = "note") val note: String?,
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readInt(),
@@ -41,13 +41,13 @@ data class Order(
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeInt(id)
-        parcel.writeInt(idkhachhang)
-        parcel.writeInt(idnhanvien)
-        parcel.writeInt(tongtien)
-        parcel.writeString(thoigian)
-        parcel.writeInt(thanhtoan)
-        parcel.writeInt(loaidon)
-        parcel.writeString(ghichu)
+        parcel.writeInt(idUser)
+        parcel.writeInt(idStaff)
+        parcel.writeInt(sum)
+        parcel.writeString(time)
+        parcel.writeInt(payment)
+        parcel.writeInt(typeOrder)
+        parcel.writeString(note)
     }
 
     override fun describeContents(): Int {

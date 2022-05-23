@@ -145,6 +145,7 @@ class VerificationFragment : BaseFragment<FragmentVerificationBinding>() {
                         // Sign in success, update UI with the signed-in user's information
                         Toast.makeText(context, "thành công", Toast.LENGTH_LONG).show()
                         //val user = task.result?.user
+                        findNavController().navigate(R.id.action_verificationFragment_to_mainFragment2)
                     } else {
                         // Sign in failed, display a message and update the UI
                         if (task.exception is FirebaseAuthInvalidCredentialsException) {

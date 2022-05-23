@@ -16,8 +16,6 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/basil_50"
-            android:backgroundTint="@color/basil_50"
             tools:context=".ui.home.HomeFragment">
 
             <include
@@ -49,7 +47,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
-                android:backgroundTint="@color/basil_50"
+                android:backgroundTint="@color/white"
                 android:contentDescription="@string/button"
                 android:minHeight="48dp"
                 android:src="@drawable/ic_baseline_menu_24"
