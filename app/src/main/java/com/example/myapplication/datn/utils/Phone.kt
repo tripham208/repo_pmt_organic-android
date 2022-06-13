@@ -3,6 +3,6 @@ package com.example.myapplication.datn.utils
 import com.squareup.moshi.Json
 
 object Phone {
-    @Json(name = "id")
+    @Json(name = "phone")
     var phone: Int = 0
 }

@@ -45,6 +45,7 @@ class AccountFragment : BaseFragment<FragmentAccountBinding>() {
             btnLogout.setOnClickListener {
                 viewModel.logout()
                 Checker.HAS_USER = false
+
                 findNavController().navigate(R.id.action_mainFragment2_to_loginFragment)
 
             }

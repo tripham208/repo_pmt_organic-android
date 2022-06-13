@@ -66,6 +66,7 @@ class OrderAdapter(val context: Context) :
         private val sum = itemBinding.tvSumOrderCard
         private val time = itemBinding.tvTimeOrderCard
         private val card = itemBinding.cardOrderItem
+        private val type = itemBinding.tvTypeOrderCart
 
         init {
             if (adapterPosition != RecyclerView.NO_POSITION) {
@@ -84,6 +85,12 @@ class OrderAdapter(val context: Context) :
             sum.text =
                 context.resources.getString(R.string.order_sum, data.sum.toStringFormat())
             time.text = context.resources.getString(R.string.order_time, data.time)
+            when (data.typeOrder) {
+                2 -> type.text = "Đã giao"
+                3 -> type.text = "Chờ duyệt"
+                4 -> type.text = "Đang giao"
+            }
+
         }
     }
 

@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.myapplication.datn.R
 import com.example.myapplication.datn.databinding.FragmentRegisterBinding
@@ -15,6 +16,7 @@ import com.example.myapplication.datn.model.entity.User
 import com.example.myapplication.datn.ui.base.BaseFragment
 import com.example.myapplication.datn.ui.login.UserViewModel
 import com.example.myapplication.datn.ui.login.VerificationFragmentArgs
+import com.example.myapplication.datn.utils.Checker
 import com.example.myapplication.datn.utils.Logger
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -61,7 +63,15 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>() {
     override fun observerLiveData() {
         super.observerLiveData()
         viewModel.registerResult.observe(viewLifecycleOwner){
-            Logger.d(it.toString())
+            if (it==true){
+                Toast.makeText(context, "Thành công", Toast.LENGTH_LONG).show()
+                Checker.HAS_USER =true
+                findNavController().navigate(R.id.action_registerFragment_to_mainFragment2)
+
+            }
+            else{
+                Toast.makeText(context, "Username đã tồn tại", Toast.LENGTH_LONG).show()
+            }
         }
     }
 

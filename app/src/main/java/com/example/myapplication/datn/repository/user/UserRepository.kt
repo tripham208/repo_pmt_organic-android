@@ -10,6 +10,7 @@ import com.example.myapplication.datn.model.entity.DetailOrder
 import com.example.myapplication.datn.model.entity.User
 import com.example.myapplication.datn.repository.user.IUserRepository
 import com.example.myapplication.datn.utils.Logger
+import com.example.myapplication.datn.utils.Phone
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -23,7 +24,9 @@ class UserRepository @Inject constructor(
     override val user: LiveData<User> = userDao.getUserToLiveData()
     override suspend fun checkLogin(username: String, pass: String): Boolean {
         //User(null, username, password = pass, "", 0, 0, null, null)
-        val x = api.getUser(username, pass)
+        //val x = api.getUser(username, pass)
+        val x = api.getUser2(User(0,username,pass,"",0,0,null,null))
+        Logger.d(x.toString())
         if (x.size == 1) {
             userDao.insert(x[0])
             x[0].id?.let { api.getCart(it) }?.let { it ->
@@ -40,7 +43,7 @@ class UserRepository @Inject constructor(
     }
 
     override suspend fun checkPhone(int: Int): Boolean {
-        val x = api.getUserByPhone(int)
+        val x = api.getUserByPhone(User(0,"","","",int,0,null,null))
         if (x.size == 1) {
             userDao.insert(x[0])
             x[0].id?.let { api.getCart(it) }?.let { it ->

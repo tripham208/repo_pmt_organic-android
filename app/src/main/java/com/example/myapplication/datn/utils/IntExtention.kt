@@ -11,5 +11,7 @@ fun Int.toStringFormat(): String {
         index -= 3
         list.add(index, ',')
     }
+    if (list.size % 3 == 2)
+        list.removeAt(0)
     return list.joinToString(separator = "")
 }

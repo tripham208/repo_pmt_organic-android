@@ -29,15 +29,28 @@ class UserViewModel @Inject constructor(private val iUserRepository: IUserReposi
     fun clickLogin(username: String, pass: String) {
         coroutineScope.launch {
             val invalid = checkInvalidInput(pass)
+            val invalid2 = checkInvalidInput(username)
             Logger.d("$invalid")
-            if (invalid) {
+            if (invalid && invalid2) {
                 _loginResult.postValue(INVALID)
             } else {
                 checkLogin(username, pass)
             }
         }
     }
-    fun updateUser(user: User){
+
+    fun loginByPhone(phone: Int) {
+        coroutineScope.launch {
+
+            if (iUserRepository.checkPhone(int = phone)) {
+                _loginResult.postValue(SUCCESS)
+            } else {
+                _loginResult.postValue(NO_ACCOUNT)
+            }
+        }
+    }
+
+    fun updateUser(user: User) {
         coroutineScope.launch {
             iUserRepository.updateUser(user)
         }
@@ -53,6 +66,7 @@ class UserViewModel @Inject constructor(private val iUserRepository: IUserReposi
     }
 
     fun logout() {
+        _loginResult.value = LOG_OUT
         coroutineScope.launch {
             iUserRepository.logoutUser()
         }
@@ -62,11 +76,11 @@ class UserViewModel @Inject constructor(private val iUserRepository: IUserReposi
         return pass.length < 6
     }
 
+
     fun register(user: User) {
         coroutineScope.launch {
             if (iUserRepository.register(user)) {
                 _registerResult.postValue(true)
-                _registerResult.value = false
             } else
                 _registerResult.postValue(false)
         }
@@ -79,6 +93,8 @@ class UserViewModel @Inject constructor(private val iUserRepository: IUserReposi
         const val INVALID = R.string.pass_invalid
         const val SUCCESS = R.string.success
         const val FAIL = R.string.fail
+        const val LOG_OUT = R.string.logout
+        const val NO_ACCOUNT = R.string.space
     }
 
 

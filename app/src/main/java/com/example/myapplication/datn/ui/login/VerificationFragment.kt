@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.myapplication.datn.databinding.FragmentVerificationBinding
@@ -13,6 +14,7 @@ import com.example.myapplication.datn.utils.Logger
 import com.google.firebase.FirebaseException
 import com.google.firebase.FirebaseTooManyRequestsException
 import com.example.myapplication.datn.R
+import com.example.myapplication.datn.utils.Checker
 
 import com.google.firebase.auth.*
 import dagger.hilt.android.AndroidEntryPoint
@@ -25,6 +27,7 @@ class VerificationFragment : BaseFragment<FragmentVerificationBinding>() {
     private lateinit var resendToken: PhoneAuthProvider.ForceResendingToken
     private lateinit var callbacks: PhoneAuthProvider.OnVerificationStateChangedCallbacks
     private val args: VerificationFragmentArgs by navArgs()
+    private val viewModel: UserViewModel by activityViewModels()
     override fun createBinding(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -61,6 +64,7 @@ class VerificationFragment : BaseFragment<FragmentVerificationBinding>() {
                     // Invalid request
                 } else if (e is FirebaseTooManyRequestsException) {
                     Logger.w("Exceeded per phone number quota for sending verification codes.")
+                    Toast.makeText(context, "Gioi hạn mỗi số có thể nhận", Toast.LENGTH_LONG).show()
                     // The SMS quota for the project has been exceeded
                 }
 
@@ -145,7 +149,8 @@ class VerificationFragment : BaseFragment<FragmentVerificationBinding>() {
                         // Sign in success, update UI with the signed-in user's information
                         Toast.makeText(context, "thành công", Toast.LENGTH_LONG).show()
                         //val user = task.result?.user
-                        findNavController().navigate(R.id.action_verificationFragment_to_mainFragment2)
+                        Logger.d(args.phone.toString())
+                        viewModel.loginByPhone(args.phone)
                     } else {
                         // Sign in failed, display a message and update the UI
                         if (task.exception is FirebaseAuthInvalidCredentialsException) {
@@ -178,9 +183,24 @@ class VerificationFragment : BaseFragment<FragmentVerificationBinding>() {
     override fun initDataSaveArgs() {
         super.initDataSaveArgs()
         //HERE NEED
-       // Toast.makeText(context, "+84${args.phone}", Toast.LENGTH_LONG).show()
+        // Toast.makeText(context, "+84${args.phone}", Toast.LENGTH_LONG).show()
         startPhoneNumberVerification("+84${args.phone}")
         //399214349 0582639863
+    }
+
+    override fun observerLiveData() {
+        super.observerLiveData()
+        viewModel.loginResult.observe(viewLifecycleOwner) {
+            if (it == R.string.success) {
+                findNavController().navigate(R.id.action_verificationFragment_to_mainFragment2)
+                Checker.HAS_USER = true
+            } else if (it == R.string.space) {
+                val action =
+                    VerificationFragmentDirections.actionVerificationFragmentToRegisterFragment(args.phone)
+                findNavController().navigate(action)
+            }
+        }
+
     }
 
 }

@@ -1,6 +1,8 @@
 package com.example.myapplication.datn.database
 
+import android.provider.ContactsContract
 import com.example.myapplication.datn.model.entity.*
+import com.example.myapplication.datn.utils.Phone
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import kotlinx.coroutines.internal.PrepareOp
@@ -26,9 +28,13 @@ interface AppAPI {
         @Path("password") password: String
     ): List<User>
 
-    @GET("user/phone/{username}/{password}")
+    @POST("user/checklogin")
+    suspend fun getUser2(
+        @Body user: User
+    ): List<User>
+    @POST("user/phone")
     suspend fun getUserByPhone(
-        @Path("username") phone: Int,
+        @Body user: User
     ): List<User>
 
 
@@ -63,7 +69,7 @@ interface AppAPI {
 
 
     companion object {
-        private const val CODE = "cfba-113-190-252-57.ap.ngrok.io"
+        private const val CODE = "a6fe-2402-800-61c5-6e1c-38ff-6281-4fa8-cfce.ap.ngrok.io"
         const val BASE_URL = "https://$CODE/api/"
         const val IMG_URL = "https://$CODE"
     }
