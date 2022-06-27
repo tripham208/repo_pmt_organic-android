@@ -69,7 +69,7 @@ interface AppAPI {
 
 
     companion object {
-        private const val CODE = "a6fe-2402-800-61c5-6e1c-38ff-6281-4fa8-cfce.ap.ngrok.io"
+        private const val CODE = "b36d-103-7-37-138.ap.ngrok.io"
         const val BASE_URL = "https://$CODE/api/"
         const val IMG_URL = "https://$CODE"
     }

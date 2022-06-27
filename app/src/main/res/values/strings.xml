@@ -24,6 +24,7 @@
 
     <string name="search">Tìm kiếm sản phẩm</string>
     <string name="find">Tìm</string>
+    <string name="fal">Username đã tồn tại</string>
 
     <!-- account-->
     <string name="phone">Số điện thoại</string>
@@ -31,7 +32,7 @@
     <string name="login_with_sms">Đăng nhập bằng SMS</string>
     <string name="login">Đăng nhập</string>
     <string name="email">Email</string>
-    <string name="pass_invalid">Mật khẩu cần nhiều hơn 6 kí tự</string>
+    <string name="pass_invalid">Mật khẩu/Tài khoản cần nhiều hơn 6 kí tự</string>
     <string name="email_accdetail">Email:</string>
     <string name="phoneAccDetail">Số điện thoại:</string>
     <string name="accDetail">Thông tin tài khoản</string>

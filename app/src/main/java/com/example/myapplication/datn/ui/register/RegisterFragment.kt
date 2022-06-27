@@ -44,7 +44,7 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>() {
                 typeAccount = 1,
                 email = binding.edEmailRegister.text.toString(),
                 address = null
-                )
+            )
             viewModel.register(user)
         }
     }
@@ -62,15 +62,13 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>() {
 
     override fun observerLiveData() {
         super.observerLiveData()
-        viewModel.registerResult.observe(viewLifecycleOwner){
-            if (it==true){
-                Toast.makeText(context, "Thành công", Toast.LENGTH_LONG).show()
-                Checker.HAS_USER =true
+        viewModel.registerResult.observe(viewLifecycleOwner) {
+            if (it == R.string.success) {
+                Toast.makeText(context, resources.getString(R.string.success), Toast.LENGTH_LONG).show()
+                Checker.HAS_USER = true
                 findNavController().navigate(R.id.action_registerFragment_to_mainFragment2)
-
-            }
-            else{
-                Toast.makeText(context, "Username đã tồn tại", Toast.LENGTH_LONG).show()
+            } else {
+                Toast.makeText(context,  resources.getString(it), Toast.LENGTH_LONG).show()
             }
         }
     }

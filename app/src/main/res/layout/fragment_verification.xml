@@ -151,7 +151,7 @@
         app:layout_constraintTop_toBottomOf="@+id/btnVeryToMain" />
 
     <TextView
-        android:id="@+id/textView8"
+        android:id="@+id/tvResend"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"

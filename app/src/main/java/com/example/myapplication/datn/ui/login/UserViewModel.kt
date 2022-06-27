@@ -22,16 +22,20 @@ class UserViewModel @Inject constructor(private val iUserRepository: IUserReposi
     val loginResult: LiveData<Int>
         get() = _loginResult
 
-    private val _registerResult = MutableLiveData<Boolean>()
-    val registerResult: LiveData<Boolean>
+    private val _registerResult = MutableLiveData<Int>()
+    val registerResult: LiveData<Int>
         get() = _registerResult
+
+    private val _time = MutableLiveData<Int>()
+    val time: LiveData<Int>
+        get() = _time
 
     fun clickLogin(username: String, pass: String) {
         coroutineScope.launch {
             val invalid = checkInvalidInput(pass)
             val invalid2 = checkInvalidInput(username)
             Logger.d("$invalid")
-            if (invalid && invalid2) {
+            if (invalid || invalid2) {
                 _loginResult.postValue(INVALID)
             } else {
                 checkLogin(username, pass)
@@ -79,12 +83,32 @@ class UserViewModel @Inject constructor(private val iUserRepository: IUserReposi
 
     fun register(user: User) {
         coroutineScope.launch {
-            if (iUserRepository.register(user)) {
-                _registerResult.postValue(true)
-            } else
-                _registerResult.postValue(false)
+            val invalid = checkInvalidInput(user.username)
+            val invalid2 = checkInvalidInput(user.password)
+            val invalid3 = checkInvalidInput(user.name)
+            if (invalid || invalid2 || invalid3) {
+                _registerResult.postValue(INVALID)
+            } else {
+                if (iUserRepository.register(user)) {
+                    _registerResult.postValue(SUCCESS)
+                } else
+                    _registerResult.postValue(EXITS)
+            }
+
         }
 
+    }
+
+    fun reSendTime() {
+        coroutineScope.launch {
+            var time = 60000
+            while (time >= 0) {
+                _time.postValue(time)
+                time -= 1000
+                delay(1000)
+            }
+
+        }
     }
 
 
@@ -95,6 +119,7 @@ class UserViewModel @Inject constructor(private val iUserRepository: IUserReposi
         const val FAIL = R.string.fail
         const val LOG_OUT = R.string.logout
         const val NO_ACCOUNT = R.string.space
+        const val EXITS = R.string.fail
     }
 
 

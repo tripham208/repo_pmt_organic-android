@@ -46,9 +46,14 @@ class OrderDetailFragment : BaseFragment<FragmentOrderDetailBinding>() {
         super.initView()
         binding.apply {
             rcvOrderDetail.adapter = adapter
-            if (args.order!=null){
-                tvSumOrder.text= resources.getString(R.string.vnd_format, args.order!!.sum.toStringFormat())
-                tvDeTailOrder.text= resources.getString(R.string.order_detail, args.order!!.id)
+            if (args.order != null) {
+                tvSumOrder.text =
+                    resources.getString(R.string.vnd_format, args.order!!.sum.toStringFormat())
+                tvDeTailOrder.text = resources.getString(R.string.order_detail, args.order!!.id)
+                if (args.order!!.note != null)
+                    tvNote.text = "Note: ${args.order!!.note}"
+                else
+                    tvNote.text = "Note:"
             }
         }
 
@@ -62,7 +67,10 @@ class OrderDetailFragment : BaseFragment<FragmentOrderDetailBinding>() {
                 var res: Product? = null
                 res = homeViewModel.getProduct(it)
 
-                val action = OrderDetailFragmentDirections.actionOrderDetailFragment2ToProductDetailFragment(res)
+                val action =
+                    OrderDetailFragmentDirections.actionOrderDetailFragment2ToProductDetailFragment(
+                        res
+                    )
                 findNavController().navigate(action)
 
                 val result = withContext(Dispatchers.Default) {
@@ -71,7 +79,7 @@ class OrderDetailFragment : BaseFragment<FragmentOrderDetailBinding>() {
             }
         }
         binding.imgBtnBackDetailOrder.setOnClickListener {
-            findNavController().popBackStack()
+            findNavController().navigate(R.id.action_orderDetailFragment2_to_mainFragment2)
         }
 
     }

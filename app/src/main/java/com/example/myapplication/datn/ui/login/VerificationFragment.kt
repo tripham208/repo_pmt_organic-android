@@ -178,13 +178,19 @@ class VerificationFragment : BaseFragment<FragmentVerificationBinding>() {
             Logger.d(code)
             verifyPhoneNumberWithCode(storedVerificationId, code)
         }
+        binding.tvResend.setOnClickListener {
+            resendVerificationCode("+84${args.phone}", resendToken)
+        }
     }
 
     override fun initDataSaveArgs() {
         super.initDataSaveArgs()
         //HERE NEED
         // Toast.makeText(context, "+84${args.phone}", Toast.LENGTH_LONG).show()
+
         startPhoneNumberVerification("+84${args.phone}")
+        viewModel.reSendTime()
+        binding.tvResend.isClickable = false
         //399214349 0582639863
     }
 
@@ -198,6 +204,14 @@ class VerificationFragment : BaseFragment<FragmentVerificationBinding>() {
                 val action =
                     VerificationFragmentDirections.actionVerificationFragmentToRegisterFragment(args.phone)
                 findNavController().navigate(action)
+            }
+        }
+        viewModel.time.observe(viewLifecycleOwner) {
+            if (it != 0) {
+                binding.tvResend.text = resources.getString(R.string.send) + "($it)"
+            } else {
+                binding.tvResend.text = resources.getString(R.string.send)
+                binding.tvResend.isClickable = true
             }
         }
 

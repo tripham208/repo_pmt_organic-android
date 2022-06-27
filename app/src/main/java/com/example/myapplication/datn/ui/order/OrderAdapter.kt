@@ -89,6 +89,7 @@ class OrderAdapter(val context: Context) :
                 2 -> type.text = "Đã giao"
                 3 -> type.text = "Chờ duyệt"
                 4 -> type.text = "Đang giao"
+                5 -> type.text = "Đã hủy"
             }
 
         }
